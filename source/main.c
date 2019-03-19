@@ -1,6 +1,7 @@
 #include "elev.h"
 #include <stdio.h>
 
+//skjer a bagera
 
 int main() {
     // Initialize hardware
