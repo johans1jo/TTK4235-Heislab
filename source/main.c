@@ -1,6 +1,7 @@
 #include "elev.h"
 #include <stdio.h>
 
+//skjer
 
 int main() {
     // Initialize hardware
