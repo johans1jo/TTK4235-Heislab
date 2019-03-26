@@ -9,9 +9,13 @@
 #define timer_h
 
 #include <stdio.h>
+#include <time.h>
 
 #endif /* timer_h */
 
-int start_timer();
+int msec = 0, trigger = 300;  /* tre sekunder */
+clock_t before;
 
-bool time_out();
+void start_timer();
+
+int time_out();
