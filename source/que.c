@@ -13,7 +13,7 @@ Floor        BUTTON_COMMAND  BUTTON_CALL_UP  BUTTON_CALL_DOWN    Current floor
 4                   0               0               0                   0
 
 orders[--floor--][--order---]*/
-int orders[3][3] = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+int orders[4][4] = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
 
 int delete_order_at_floor(int floor){
     for (int i = 0; i < 3; i++){
