@@ -6,12 +6,10 @@
 
 int main() {
     // Initialize hardware
-    int start_time();
+    start_timer();
     while(1){
-        printf (time_out());
+        printf("Timer: %d", time_out());
+
     }
-    
-
-
     return 0;
 }

@@ -1,6 +1,6 @@
 //
 //  timer.c
-//  
+//
 //
 //  Created by Siri Hegsvold on 24/03/2019.
 //
@@ -9,18 +9,14 @@
 
 
 void start_timer(){
-    before = clock();
+    before = time(NULL);
 }
-
 int time_out(){
-    clock_t different = clock() - before;
-    msec = different * 1000 /CLOCKS_PER_SEC;
-    if (msec < trigger){
+    int trigger = 3;
+    double sec = difftime(time(NULL), before);
+    if (sec < trigger){
         return 0;
     } else {
         return 1;
     }
 }
-
-
-
