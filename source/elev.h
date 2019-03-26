@@ -25,7 +25,8 @@ int elev_init(void);
 typedef enum tag_elev_motor_direction { 
     DIRN_DOWN = -1,
     DIRN_STOP = 0,
-    DIRN_UP = 1
+    DIRN_UP = 1,
+    E_STOP = 2
 } elev_motor_direction_t;
 
 
