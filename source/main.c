@@ -6,7 +6,7 @@
 
 int main() {
     // Initialize hardware
-    printf("Hei");
+    printf("Hei på deg");
 
     return 0;
 }
