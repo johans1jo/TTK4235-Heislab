@@ -4,3 +4,5 @@ typedef enum states {
     RUNNING,
     DOOR_OPEN
 } states_t;
+
+int start();
