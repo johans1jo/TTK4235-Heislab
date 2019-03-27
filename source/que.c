@@ -40,9 +40,14 @@ states_type what_to_do(elev_motor_direction_t dir){
      //Checking buttons and updating orders array
     for (int i = 0; i < FLOORS; i++){
         orders[i][0] = elev_get_button_signal(BUTTON_COMMAND, i);
+    }
+         //Checking buttons and updating orders array
+    for (int i = 0; i < FLOORS-1; i++){
         orders[i][1] = elev_get_button_signal(BUTTON_CALL_UP, i);
+    }
+         //Checking buttons and updating orders array
+    for (int i = 1; i < FLOORS; i++){
         orders[i][2] = elev_get_button_signal(BUTTON_CALL_DOWN, i);
-
     }
 
     //Checking floor sensors and updating orders array
