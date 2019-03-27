@@ -44,7 +44,7 @@ states_type what_to_do(elev_motor_direction_t dir){
             orders[i][0] = elev_get_button_signal(BUTTON_COMMAND, i);
         }
     }
-    //If there is UP no order in the array then check button
+    //If there is no UP order in the array then check button
     //and  update orders array
     for (int i = 0; i < FLOORS-1; i++){
         if (orders[i][1] == 0){
