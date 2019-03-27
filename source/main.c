@@ -6,7 +6,8 @@
 
 int main() {
     // Initialize hardware
-    printf("Hei");
+    elev();
+    printf("Halla!");
 
     return 0;
 }
