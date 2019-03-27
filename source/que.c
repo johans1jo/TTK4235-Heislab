@@ -37,28 +37,39 @@ states_type what_to_do(elev_motor_direction_t dir){
         printf("\n");
     }
 
-     //Checking buttons and updating orders array
+    //If there is no CAB order in the array then check button 
+    //and  update orders array
     for (int i = 0; i < FLOORS; i++){
-        orders[i][0] = elev_get_button_signal(BUTTON_COMMAND, i);
+        if (orders[i][0] == 0){
+            orders[i][0] = elev_get_button_signal(BUTTON_COMMAND, i);
+        }
     }
-         //Checking buttons and updating orders array
+    //If there is UP no order in the array then check button 
+    //and  update orders array
     for (int i = 0; i < FLOORS-1; i++){
-        orders[i][1] = elev_get_button_signal(BUTTON_CALL_UP, i);
+        if (orders[i][0] == 0){
+            orders[i][1] = elev_get_button_signal(BUTTON_CALL_UP, i);
+        }
     }
-         //Checking buttons and updating orders array
+    //If there is no DOWN order in the array then check button 
+    //and  update orders array
     for (int i = 1; i < FLOORS; i++){
-        orders[i][2] = elev_get_button_signal(BUTTON_CALL_DOWN, i);
+        if (orders[i][0] == 0){
+            orders[i][2] = elev_get_button_signal(BUTTON_CALL_DOWN, i);
+        }
     }
 
-    //Checking floor sensors and updating orders array
-    int current_floor;
-    current_floor = elev_get_floor_sensor_signal();
-    for (int i = 0; i < FLOORS; i++) {
-        orders[i][3] = 0;
+    //Checking floor sensors and updating orders array if an sensor is detecting
+    int current_floor = elev_get_floor_sensor_signal();
+    if (current_floor >= 0){
+        for (int i = 0; i < FLOORS; i++) {
+            orders[i][3] = 0;
+        }
+        orders[current_floor][3] = 1;
     }
-    //orders[current_floor][3] = 1;
 
-    /*---The code bellow decides which state to return---*/
+
+/*---The code bellow decides which state to return---*/
 
     //Checking emergancy stop
     if (elev_get_stop_signal() && dir == DIRN_STOP){
@@ -79,7 +90,7 @@ states_type what_to_do(elev_motor_direction_t dir){
         delete_order_at_floor(current_floor);           //Delete orders at the floor
         return DOOR_OPEN;
     }
-
+    
     /*If BUTTON_CALL_UP at current floor  and dir = DIRN_UP -> stop elevator
     return DOOR_OPEN state*/
     if (orders[current_floor][1] && dir == DIRN_UP){
@@ -117,6 +128,5 @@ states_type what_to_do(elev_motor_direction_t dir){
     }
 
     //If none of the above is true -> IDLE
-
     return IDLE;
-}
+    };
