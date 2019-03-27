@@ -1,5 +1,6 @@
 #include "que.h"
 #include "elev.h"
+#include <stdio.h>
 
 #define FLOORS 4
 
@@ -29,6 +30,13 @@ int delete_all_orders(){
 };
 
 states_type what_to_do(elev_motor_direction_t dir){
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            printf("%d", orders[i][j]);
+        }
+        printf("\n");
+    }
+
      //Checking buttons and updating orders array
     for (int i = 0; i < FLOORS; i++){
         orders[i][0] = elev_get_button_signal(BUTTON_COMMAND, i);
