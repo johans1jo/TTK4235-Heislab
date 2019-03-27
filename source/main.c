@@ -11,7 +11,8 @@ int main() {
     elev_set_motor_direction(DIRN_STOP);
     printf("Halla!");
     while(1){
-        printf("Stat: %d \n", what_to_do(DIRN_DOWN));
+        //printf("Stat: %d \n", what_to_do(DIRN_DOWN));
+        what_to_do(DIRN_DOWN);
     }
 
     return 0;
