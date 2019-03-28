@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <pthread.h>
 
-#include "elevator_hardware.h"
+#include "elevsim.h"
 #include "con_load.h"
 
 static int sockfd;
@@ -43,14 +43,14 @@ void elev_init() {
 
 
 
-void elev_set_motor_direction(elevator_hardware_motor_direction_t dirn) {
+void elev_set_motor_direction(elev_motor_direction_t dirn) {
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]) {1, dirn}, 4, 0);
     pthread_mutex_unlock(&sockmtx);
 }
 
 
-void elev_set_button_lamp(elevator_hardware_button_type_t button, int floor, int value) {
+void elev_set_button_lamp(elev_button_type_t button, int floor, int value) {
     assert(floor >= 0);
     assert(floor < N_FLOORS);
     assert(button >= 0);
@@ -88,7 +88,7 @@ void elev_set_stop_lamp(int value) {
 
 
 
-int elev_get_button_signal(elevator_hardware_button_type_t button, int floor) {
+int elev_get_button_signal(elev_button_type_t button, int floor) {
     pthread_mutex_lock(&sockmtx);
     send(sockfd, (char[4]) {6, button, floor}, 4, 0);
     char buf[4];
