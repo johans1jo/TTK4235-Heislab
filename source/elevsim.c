@@ -11,13 +11,13 @@
 static int sockfd;
 static pthread_mutex_t sockmtx;
 
-void elev_init() {
+int elev_init() {
     char ip[16] = "localhost";
     char port[8] = "15657";
-    con_load("elevator_hardware.con",
+    /*con_load("elevator_hardware.con",
         con_val("com_ip",   ip,   "%s")
         con_val("com_port", port, "%s")
-    )
+    )*/
     
     pthread_mutex_init(&sockmtx, NULL);
     
@@ -38,6 +38,7 @@ void elev_init() {
     freeaddrinfo(res);
     
     send(sockfd, (char[4]) {0}, 4, 0);
+    return 1;
 }
 
 

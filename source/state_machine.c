@@ -1,5 +1,5 @@
 #include "state_machine.h"
-#include "elev.h"
+#include "elevsim.h"
 
 int run(){
     elev_motor_direction_t dir;
@@ -8,7 +8,7 @@ int run(){
             break;
         case RUNNING:
             break;
-        case DOOR_OPEN;
+        case DOOR_OPEN:
             break;
     }
 }

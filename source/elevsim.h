@@ -19,7 +19,7 @@ typedef enum tag_elevator_hardware_lamp_type {
     BUTTON_COMMAND = 2
 } elev_button_type_t;
 
-void elev_init();
+int elev_init();
 
 void elev_set_motor_direction(elev_motor_direction_t dirn);
 void elev_set_button_lamp(elev_button_type_t button, int floor, int value);
