@@ -106,3 +106,5 @@ states_t what_to_do(elev_motor_direction_t dir){
     //If none of the above is true -> IDLE
     return IDLE;
     };
+
+
