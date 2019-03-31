@@ -12,12 +12,8 @@ int main() {
         return 1;
     }
 
-    elev_motor_direction_t mdir = DIRN_STOP;
-
-    elev_set_motor_direction(mdir);
     while(1){
-        states_t state;
-        state = what_to_do(mdir);
+        get_new_orders();
     }
     
 

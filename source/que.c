@@ -28,6 +28,49 @@ int delete_all_orders(){
     return 0;
 };
 
+int get_new_orders(){
+    for (int i = 0; i < 4; i++){
+        printf("%d. etg: ", i+1);
+        for (int j = 0; j < 4; j++){
+            printf("%d", orders[i][j]);
+        }
+        printf("\n");
+    }
+
+    //if the CAB button is pushed, update the order
+    for (int i = 0; i < N_FLOORS; i++){
+        if (elev_get_button_signal(BUTTON_COMMAND, i)){
+            orders[i][0] = 1;
+        }
+    }
+    //if the UP button is pushed, update the order
+    for (int i = 0; i < N_FLOORS-1; i++){
+        if (elev_get_button_signal(BUTTON_CALL_UP, i)){
+            orders[i][1] = 1;
+        }
+    }
+    //if the DOWN button is pushed, update the order
+    for (int i = 1; i < N_FLOORS; i++){
+        if (elev_get_button_signal(BUTTON_CALL_DOWN, i)){
+            orders[i][2] = 1;
+        }
+    }
+    //Checking floor sensors and updating orders array if a sensor is detecting
+    int current_floor;
+    current_floor = elev_get_floor_sensor_signal();
+    if (current_floor >= 0){
+        for (int i = 0; i < N_FLOORS; i++) {
+            orders[i][3] = 0;
+        }
+        orders[current_floor][3] = 1;
+    }
+    return 1;
+};
+
+/*--This is the beginning of a state machine, but we do not want it to 
+wrok within this function. The code is good so we use it in smaller separate
+functions forward--
+
 states_t what_to_do(elev_motor_direction_t dir){
     for (int i = 0; i < 4; i++){
         printf("%d. etg: ", i+1);
@@ -69,7 +112,7 @@ states_t what_to_do(elev_motor_direction_t dir){
     }
 
 
-/*---The code bellow decides which state to return---*/
+//---The code bellow decides which state to return---
 
     //Checking emergancy stop
     if (elev_get_stop_signal() && dir == DIRN_STOP){
@@ -84,24 +127,24 @@ states_t what_to_do(elev_motor_direction_t dir){
         return IDLE;
     }
 
-    /*If BUTTON_COMMAND at current floor -> stop elevator
-    return DOOR_OPEN state*/
+    //If BUTTON_COMMAND at current floor -> stop elevator
+    //return DOOR_OPEN state
     if (orders[current_floor][0] == 1){
         elev_set_motor_direction(DIRN_STOP);            //Stopp the elevator
         delete_order_at_floor(current_floor);           //Delete orders at the floor
         return DOOR_OPEN;
     }
 
-    /*If BUTTON_CALL_UP at current floor  and dir = DIRN_UP -> stop elevator
-    return DOOR_OPEN state*/
+    //If BUTTON_CALL_UP at current floor  and dir = DIRN_UP -> stop elevator
+    //return DOOR_OPEN state
     if (orders[current_floor][1] == 1 && dir == DIRN_UP){
         elev_set_motor_direction(DIRN_STOP);            //Stopp the elevator
         delete_order_at_floor(current_floor);           //Delete orders at the floor
         return DOOR_OPEN;
     }
 
-    /*If BUTTON_CALL_DOWN at current floor  and dir = DIRN_DOWN -> stop elevator
-    return DOOR_OPEN state*/
+    //If BUTTON_CALL_DOWN at current floor  and dir = DIRN_DOWN -> stop elevator
+    //return DOOR_OPEN state
     if (orders[current_floor][2] == 1 && dir == DIRN_DOWN) {
         elev_set_motor_direction(DIRN_STOP);            //Stopp the elevator
         delete_order_at_floor(current_floor);           //Delete orders at the floor
@@ -131,3 +174,4 @@ states_t what_to_do(elev_motor_direction_t dir){
     //If none of the above is true -> IDLE
     return IDLE;
     };
+    */
