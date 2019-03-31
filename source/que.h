@@ -14,3 +14,7 @@ int get_new_orders();
 comparing the orders to the current floor
 returns the state; IDLE, RUNNING, DOOR_OPEN, E_STOP*/
 states_t what_to_do(elev_motor_direction_t dir);
+
+int current_floor_lamp();
+int stop_lamp();
+int order_lamp();
