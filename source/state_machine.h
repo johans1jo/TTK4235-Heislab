@@ -1,8 +1,13 @@
 
 typedef enum states {
-    IDLE = 0,
+    INIT = 0,
+    IDLE,
     RUNNING,
     DOOR_OPEN
 } states_t;
 
-int start();
+//Initializes the elevator;
+//puts it at a random floor and returns 1
+int init();
+
+int run();

@@ -1,6 +1,7 @@
 #include "elevsim.h"
 #include "timer.h"
 #include "que.h"
+#include "state_machine.h"
 #include <stdio.h>
 
 
@@ -12,10 +13,7 @@ int main() {
         return 1;
     }
 
-    while(1){
-        get_new_orders();
-    }
+    run();
     
-
     return 0;
 }
