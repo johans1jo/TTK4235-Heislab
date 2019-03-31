@@ -3,6 +3,7 @@
 
 int run(){
     elev_motor_direction_t dir;
+
     switch (what_to_do(dir)){
         case IDLE:
             break;
