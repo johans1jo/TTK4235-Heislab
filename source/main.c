@@ -1,6 +1,5 @@
 #include "elevsim.h"
 #include "timer.h"
-#include "state_machine.h"
 #include "que.h"
 #include <stdio.h>
 
