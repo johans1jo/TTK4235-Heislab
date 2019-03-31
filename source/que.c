@@ -67,6 +67,8 @@ int get_new_orders(){
     return 1;
 };
 
+
+
 /*--This is the beginning of a state machine, but we do not want it to 
 wrok within this function. The code is good so we use it in smaller separate
 functions forward--
@@ -174,3 +176,37 @@ states_t what_to_do(elev_motor_direction_t dir){
     //If none of the above is true -> IDLE
     return IDLE;
     };
+*/
+
+int current_floor_lamp(){
+    int current_floor;
+    for(int i = 0; i < N_FLOORS; i++){
+        if (orders[i][3] == 1){
+            elev_set_floor_indicator(i);
+        }
+    }
+    return 1;
+}
+    
+int stop_lamp(){
+    int stop_button;
+    stop_button = elev_get_stop_signal();
+    if (stop_button == 1){
+        elev_set_stop_lamp(!0);
+    }
+    return 1;
+}
+
+int order_lamp(){
+    for(int i = 0; i < N_FLOORS; i++){
+        elev_set_button_lamp(BUTTON_COMMAND,i,orders[i][0]);
+    }
+    for(int j = 0; j < N_FLOORS; j++){
+        elev_set_button_lamp(BUTTON_CALL_UP,j,orders[j][1]);
+    }
+    for(int k = 0; k < N_FLOORS; k++){
+        elev_set_button_lamp(BUTTON_CALL_DOWN,k,orders[k][2]);
+    }
+    return 1;
+}
+
