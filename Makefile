@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SOURCES := main.c elev.c io.c timer.c state_machine.c
+=======
+SOURCES := main.c elevsim.c io.c timer.c que.c
+>>>>>>> que
 
 BUILD_DIR := build
 OBJ := $(SOURCES:%.c=$(BUILD_DIR)/%.o)

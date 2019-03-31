@@ -1,14 +1,22 @@
-#include "elev.h"
+#include "elevsim.h"
 #include "timer.h"
 #include "state_machine.h"
+#include "que.h"
 #include <stdio.h>
 
 
 
 int main() {
     // Initialize hardware
-    elev_init();
-    printf("Hei på deg");
-    start();
+    if (!elev_init()) {
+        printf("Unable to initialize elevator hardware!\n");
+        return 1;
+    }
+
+    while(1){
+        get_new_orders();
+    }
+    
+
     return 0;
 }
