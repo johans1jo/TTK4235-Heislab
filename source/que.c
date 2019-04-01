@@ -120,23 +120,25 @@ int e_stop(){
     return elev_get_stop_signal();
 };
 
-/*
-//---The code bellow decides which state to return---
-
-    //Checking emergancy stop
-    if (elev_get_stop_signal() && dir == DIRN_STOP){
-        elev_set_motor_direction(DIRN_STOP);            //Stopp the elevator
-        delete_all_orders();           
-                         //Delete all orders at all floors
-        return DOOR_OPEN;
+int stop_lamp(){
+    int stop_button;
+    stop_button = elev_get_stop_signal();
+    if (stop_button == 1){
+        elev_set_stop_lamp(!0);
     }
-    if (elev_get_stop_signal() && dir != DIRN_STOP){
-        elev_set_motor_direction(DIRN_STOP);            //Stopp the elevator
-        delete_all_orders();                            //Delete all orders at all floors
-        return IDLE;
-    }
+    return 1;
+}
 
-    //If none of the above is true -> IDLE
-    return IDLE;
-    };
-*/
+int order_lamp(){
+    for(int i = 0; i < N_FLOORS; i++){
+        elev_set_button_lamp(BUTTON_COMMAND,i,orders[i][0]);
+    }
+    for(int j = 0; j < N_FLOORS; j++){
+        elev_set_button_lamp(BUTTON_CALL_UP,j,orders[j][1]);
+    }
+    for(int k = 0; k < N_FLOORS; k++){
+        elev_set_button_lamp(BUTTON_CALL_DOWN,k,orders[k][2]);
+    }
+    return 1;
+}
+
