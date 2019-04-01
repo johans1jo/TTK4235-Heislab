@@ -84,35 +84,36 @@ int orders_bellow(){
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
     if (current_floor != -1){
-        //If dir = DRIN_STOP check if there are orders bellow
         for (int floor = 0; floor < current_floor; floor++) {
-            for (int order = 0; order <= 2; order++){
-                if (orders[floor][order] == 1) {
-                    return 1;
-                }
+            //If UP order
+            if (orders[floor][1] == 1) {
+                return 1;
+            }
+            //If DOWN or CAB order
+            if (orders[floor][2] == 1 || orders[floor][0] == 1) {
+                return -1;
             }
         }
-        return 0;
     }
-    return -1;
-
+    return 0;
 };
 
 int orders_above(){
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
     if (current_floor != -1){
-    //If dir = DRIN_STOP check if there are orders above
         for (int floor = 4; floor > current_floor; floor--) {
-            for (int order = 0; order <= 2; order++){
-                if (orders[floor][order] == 1) {
-                    return 1;
-                }
+            //If UP or CAB order
+            if (orders[floor][1] == 1 || orders[floor][0] == 1) {
+                return 1;
+            }
+            //If DOWN
+            if (orders[floor][2] == 1) {
+                return -1;
             }
         }
-        return 0;
     }
-    return -1;
+    return 0;
 };
 
 int e_stop(){

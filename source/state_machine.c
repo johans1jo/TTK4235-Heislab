@@ -33,18 +33,28 @@ int run(){
             case IDLE       :
             if (orders_above() == 1){
                 dir = DIRN_UP;
-                elev_set_motor_direction(dir);
+                elev_set_motor_direction(DIRN_UP);
+                elev_state = RUNNING;
+            }
+            else if (orders_above() == -1){
+                dir = DIRN_DOWN;
+                elev_set_motor_direction(DIRN_UP);
                 elev_state = RUNNING;
             }
             else if (orders_bellow() == 1){
+                dir = DIRN_UP;
+                elev_set_motor_direction(DIRN_DOWN);
+                elev_state = RUNNING;
+            }
+            else if (orders_bellow() == -1){
                 dir = DIRN_DOWN;
-                elev_set_motor_direction(dir);
+                elev_set_motor_direction(DIRN_DOWN);
                 elev_state = RUNNING;
             }
             break;
 
             case RUNNING    :
-            if (order_at_floor(dir)){
+            if (order_at_floor(dir) == 1){
                 elev_set_motor_direction(DIRN_STOP);
                 elev_set_door_open_lamp(1);
                 start_timer();
@@ -56,6 +66,16 @@ int run(){
             if (time_out() == 1){
                 delete_order_at_floor(elev_get_floor_sensor_signal());
                 elev_set_door_open_lamp(0);
+                if (dir == DIRN_DOWN && orders_bellow() == 1){
+                    elev_set_motor_direction(DIRN_DOWN);
+                    elev_state = RUNNING;
+                    break;
+                };
+                if (dir == DIRN_UP && orders_above() == 1){
+                    elev_set_motor_direction(DIRN_UP);
+                    elev_state = RUNNING;
+                    break;
+                }
                 elev_state = IDLE;
             }
             
