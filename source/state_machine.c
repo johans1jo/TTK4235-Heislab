@@ -22,6 +22,23 @@ int run(){
 
     while (1){
         get_new_orders();
+        current_floor_lamp();
+        order_lamp();
+
+        if (e_stop() == 1){
+            elev_set_motor_direction(DIRN_STOP);
+            delete_all_orders();
+            if (elev_state == DOOR_OPEN){
+                elev_set_door_open_lamp(1);
+            }
+            else {
+                elev_state = IDLE;
+            }
+            while(e_stop() == 1){elev_set_stop_lamp(1);};
+            elev_set_stop_lamp(0);
+            start_timer();
+
+        }
 
         switch (elev_state){
             case INIT       :
@@ -31,6 +48,7 @@ int run(){
             break;
 
             case IDLE       :
+            current_floor_lamp();
             if (orders_above() == 1){
                 dir = DIRN_UP;
                 elev_set_motor_direction(DIRN_UP);

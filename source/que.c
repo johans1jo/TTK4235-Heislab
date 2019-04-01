@@ -120,11 +120,20 @@ int e_stop(){
     return elev_get_stop_signal();
 };
 
+int current_floor_lamp(){
+    for(int i = 0; i < N_FLOORS; i++){
+        if (orders[i][3] == 1){
+            elev_set_floor_indicator(i);
+        }
+    }
+    return 1;
+}
+
 int stop_lamp(){
     int stop_button;
     stop_button = elev_get_stop_signal();
     if (stop_button == 1){
-        elev_set_stop_lamp(!0);
+        elev_set_stop_lamp(1);
     }
     return 1;
 }
