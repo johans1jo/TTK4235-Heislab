@@ -28,13 +28,15 @@ int run(){
         if (e_stop() == 1){
             elev_set_motor_direction(DIRN_STOP);
             delete_all_orders();
-            if (elev_state == DOOR_OPEN){
+            if (elev_get_floor_sensor_signal() != -1){
                 elev_set_door_open_lamp(1);
+                elev_state = DOOR_OPEN;
             }
             else {
                 elev_state = IDLE;
             }
-            while(e_stop() == 1){elev_set_stop_lamp(1);};
+            elev_set_stop_lamp(1);
+            while(e_stop() == 1){};
             elev_set_stop_lamp(0);
             start_timer();
 

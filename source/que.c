@@ -1,3 +1,4 @@
+  
 #include "que.h"
 #include "elevsim.h"
 #include <stdio.h>
@@ -10,7 +11,6 @@ Floor        BUTTON_COMMAND  BUTTON_CALL_UP  BUTTON_CALL_DOWN    Current floor
 2                   0               0               0                   0
 3                   0               0               0                   0
 4                   0               0               0                   0
-
 orders[--floor--][--order---]*/
 int orders[4][4] = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
 
@@ -150,4 +150,3 @@ int order_lamp(){
     }
     return 1;
 }
-
