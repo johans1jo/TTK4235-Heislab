@@ -68,27 +68,37 @@ int update_floor_array(){
             orders[i][3] = 0;
         }
         orders[current_floor][3] = 1;
+        return current_floor;
     }
-    return current_floor;
+    return -1;
 };
 
-int order_at_floor(elev_motor_direction_t dir){
+int order_at_floor(elev_motor_direction_t dir, elev_motor_direction_t motor_dir){
     //If order matching "dir" at current floor -> stop elevator
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
-    if ((orders[current_floor][0] == 1) ||
-        ((orders[current_floor][1] == 1 && dir == DIRN_UP) &&
-        !(orders_bellow() == 1)) ||
-        ((orders[current_floor][2] == 1 && dir == DIRN_DOWN) &&
-        !(orders_above() == -1))) {
-        return 1;
-    }
+    if(current_floor != -1){
+        if ((orders[current_floor][0] == 1)
+            ||
+            (orders[current_floor][1] == 1 && dir == DIRN_UP &&
+            orders_bellow() != 1)
+            ||
+            (orders[current_floor][2] == 1 && dir == DIRN_DOWN &&
+            orders_above() != -1)) {
+                return 1;
+                }
+            }
     return 0;
 };
 
 int orders_current_floor(){
     int current_floor;
-    current_floor = elev_get_floor_sensor_signal();
+    for(int i = 0; i < N_FLOORS; i++){
+        if (orders[i][3] == 1){
+            current_floor = i;
+        }
+    }
+    //current_floor = elev_get_floor_sensor_signal();
     if (current_floor != -1){
         if ((orders[current_floor][0] == 1) ||
             (orders[current_floor][1] == 1) ||
@@ -98,44 +108,6 @@ int orders_current_floor(){
     }
     return 0;
 };
-/*
-int orders_bellow(){
-    int current_floor;
-    current_floor = elev_get_floor_sensor_signal();
-    if (current_floor != -1){
-        for (int floor = 0; floor < current_floor; floor++) {
-            //If UP order
-            if (orders[floor][1] == 1) {
-                return 1;
-            }
-            //If DOWN or CAB order
-            if (orders[floor][2] == 1 || orders[floor][0] == 1) {
-                return -1;
-            }
-        }
-    }
-    return 0;
-};
-
-int orders_above(){
-    int current_floor;
-    current_floor = elev_get_floor_sensor_signal();
-    if (current_floor != -1){
-        for (int floor = 3; floor > current_floor; floor--) {
-            //If UP or CAB order
-            if (orders[floor][1] == 1 || orders[floor][0] == 1) {
-                return 1;
-            }
-            //If DOWN
-            if (orders[floor][2] == 1) {
-                return -1;
-            }
-        }
-    }
-    return 0;
-};
-
-*/
 
 int orders_bellow(){
     int current_floor;
@@ -144,34 +116,40 @@ int orders_bellow(){
             current_floor = i;
         }
     }
+
     for (int floor = 0; floor < current_floor; floor++) {
+        if (orders[floor][2] == 1) {
+            return -1;
+        }
         //If UP order
         if (orders[floor][1] == 1) {
             return 1;
         }
-        //If DOWN or CAB order
-        if (orders[floor][2] == 1 || orders[floor][0] == 1) {
-            return -1;
+        if (orders[floor][0] == 1){
+            return 2;
         }
     }
     return 0;
 };
 
 int orders_above(){
-    int floorNow;
+    int current_floor;
     for(int i = 0; i < N_FLOORS; i++){
         if (orders[i][3] == 1){
-            floorNow = i;
+            current_floor = i;
         }
     }
-    for (int floor = 3; floor > floorNow; floor--) {
-        //If UP or CAB order
-        if (orders[floor][1] == 1 || orders[floor][0] == 1) {
+    for (int floor = 3; floor > current_floor; floor--) {
+        //If UP
+        if (orders[floor][1] == 1) {
             return 1;
         }
         //If DOWN
         if (orders[floor][2] == 1) {
             return -1;
+        }
+        if (orders[floor][0] == 1){
+            return 2;
         }
     }
     return 0;

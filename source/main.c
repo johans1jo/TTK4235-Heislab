@@ -12,7 +12,7 @@ int main() {
         printf("Unable to initialize elevator hardware!\n");
         return 1;
     }
-    printf("Initialized");
+    printf("Initialized\n");
 
     run();
 

@@ -13,7 +13,7 @@ int get_new_orders();
 
 //Checks if orders at current floor
 // returns 1 if true
-int order_at_floor(elev_motor_direction_t dir);
+int order_at_floor(elev_motor_direction_t dir, elev_motor_direction_t motor_dir);
 
 //Check orders in current floor
 //returns 1 if true
