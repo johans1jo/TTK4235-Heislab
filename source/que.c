@@ -102,7 +102,7 @@ int orders_above(){
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
     if (current_floor != -1){
-        for (int floor = 4; floor > current_floor; floor--) {
+        for (int floor = 3; floor > current_floor; floor--) {
             //If UP or CAB order
             if (orders[floor][1] == 1 || orders[floor][0] == 1) {
                 return 1;
@@ -116,8 +116,67 @@ int orders_above(){
     return 0;
 };
 
+/*
+
+int orders_bellow(){
+    int current_floor;
+    for(int i = 0; i < N_FLOORS; i++){
+        if (orders[i][3] == 1){
+            current_floor = i;
+        }
+    }
+    for (int floor = 0; floor < current_floor; floor++) {
+        //If UP order
+        if (orders[floor][1] == 1) {
+            return 1;
+        }
+        //If DOWN or CAB order
+        if (orders[floor][2] == 1 || orders[floor][0] == 1) {
+            return -1;
+        }
+    }
+    return 0;
+};
+
+int orders_above(){
+    int floorNow;
+    for(int i = 0; i < N_FLOORS; i++){
+        if (orders[i][3] == 1){
+            floorNow = i;
+        }
+    }
+    for (int floor = 3; floor > floorNow; floor--) {
+        //If UP or CAB order
+        if (orders[floor][1] == 1 || orders[floor][0] == 1) {
+            return 1;
+        }
+        //If DOWN
+        if (orders[floor][2] == 1) {
+            return -1;
+        }
+    }
+    return 0;
+};
+*/
+
 int e_stop(){
-    return elev_get_stop_signal();
+    elev_set_motor_direction(DIRN_STOP);
+    delete_all_orders();
+    elev_set_stop_lamp(1);
+    if (elev_get_floor_sensor_signal() != -1){
+        elev_set_door_open_lamp(1);
+    }
+    while(elev_get_stop_signal() != 0){};
+    elev_set_stop_lamp(0);
+    start_timer();
+
+    if (elev_get_floor_sensor_signal() != -1){
+        return 1;
+        }
+    else {
+        return 0;
+    }
+
 };
 
 int current_floor_lamp(){
@@ -125,15 +184,6 @@ int current_floor_lamp(){
         if (orders[i][3] == 1){
             elev_set_floor_indicator(i);
         }
-    }
-    return 1;
-}
-
-int stop_lamp(){
-    int stop_button;
-    stop_button = elev_get_stop_signal();
-    if (stop_button == 1){
-        elev_set_stop_lamp(1);
     }
     return 1;
 }

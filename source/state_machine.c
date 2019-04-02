@@ -24,22 +24,14 @@ int run(){
         get_new_orders();
         current_floor_lamp();
         order_lamp();
-
-        if (e_stop() == 1){
-            elev_set_motor_direction(DIRN_STOP);
-            delete_all_orders();
-            if (elev_get_floor_sensor_signal() != -1){
-                elev_set_door_open_lamp(1);
+        
+        if (elev_get_stop_signal() == 1){
+            if (e_stop() == 1){
                 elev_state = DOOR_OPEN;
             }
-            else {
+            else{
                 elev_state = IDLE;
             }
-            elev_set_stop_lamp(1);
-            while(e_stop() == 1){};
-            elev_set_stop_lamp(0);
-            start_timer();
-
         }
 
         switch (elev_state){

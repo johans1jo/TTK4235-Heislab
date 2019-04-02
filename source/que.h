@@ -1,4 +1,5 @@
 #include "elevsim.h"
+#include "timer.h"
 
 
 //Deletes all orders at one floor
@@ -28,7 +29,5 @@ int e_stop();
 
 /*sets the lamp of the current and last floor the elevator visited*/
 int current_floor_lamp();
-/*sets the lamp on the stop-button when it is activated*/
-int stop_lamp();
 /*sets the lamp when orders are activated, and deletes them when they are complited*/
 int order_lamp();
