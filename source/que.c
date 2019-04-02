@@ -59,7 +59,7 @@ int get_new_orders(){
     return 1;
 };
 
-int order_at_floor(elev_motor_direction_t dir){
+int update_floor_array(){
     //Checking floor sensors and updating orders array if a sensor is at high state
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
@@ -69,8 +69,13 @@ int order_at_floor(elev_motor_direction_t dir){
         }
         orders[current_floor][3] = 1;
     }
+    return current_floor;
+};
 
+int order_at_floor(elev_motor_direction_t dir){
     //If order matching "dir" at current floor -> stop elevator
+    int current_floor;
+    current_floor = elev_get_floor_sensor_signal();
     if ((orders[current_floor][0] == 1) ||
         ((orders[current_floor][1] == 1 && dir == DIRN_UP) &&
         !(orders_bellow() == 1)) ||
@@ -93,7 +98,7 @@ int orders_current_floor(){
     }
     return 0;
 };
-
+/*
 int orders_bellow(){
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
@@ -130,7 +135,7 @@ int orders_above(){
     return 0;
 };
 
-/*
+*/
 
 int orders_bellow(){
     int current_floor;
@@ -171,7 +176,7 @@ int orders_above(){
     }
     return 0;
 };
-*/
+
 
 int e_stop(){
     elev_set_motor_direction(DIRN_STOP);

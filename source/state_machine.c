@@ -21,6 +21,7 @@ int run(){
 
     while (1){
         get_new_orders();
+        update_floor_array();
         current_floor_lamp();
         order_lamp();
 
