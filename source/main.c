@@ -1,4 +1,4 @@
-#include "elevsim.h"
+#include "elev.h"
 #include "timer.h"
 #include "que.h"
 #include "state_machine.h"
@@ -12,8 +12,9 @@ int main() {
         printf("Unable to initialize elevator hardware!\n");
         return 1;
     }
+    printf("Initialized");
 
     run();
-    
+
     return 0;
 }

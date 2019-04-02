@@ -1,4 +1,4 @@
-#include "elevsim.h"
+#include "elev.h"
 #include "timer.h"
 
 
@@ -15,12 +15,16 @@ int get_new_orders();
 // returns 1 if true
 int order_at_floor(elev_motor_direction_t dir);
 
+//Check orders in current floor
+//returns 1
+int orders_current_floor();
+
 //Check orders bellow
-//returns 1 if true, -1 if not on a floor
+//returns 1 if BUTTON_UP is true, -1 if BUTTON_DOWN or BUTTON_COMMAND is true
 int orders_bellow();
 
 //Check orders above
-//returns 1 if true, -1 if not on a floor
+//returns 1 if BUTTON_UP or BUTTON_COMMAND is true, -1 if BUTTON_DOWN is true
 int orders_above();
 
 //cheking emergency stop

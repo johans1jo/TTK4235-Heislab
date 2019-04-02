@@ -1,6 +1,6 @@
-  
+
 #include "que.h"
-#include "elevsim.h"
+#include "elev.h"
 #include <stdio.h>
 
 
@@ -71,11 +71,25 @@ int order_at_floor(elev_motor_direction_t dir){
     }
 
     //If order matching "dir" at current floor -> stop elevator
-    if ((orders[current_floor][0] == 1) || 
-        (orders[current_floor][1] == 1 && dir == DIRN_UP) || 
-        (orders[current_floor][2] == 1 && dir == DIRN_DOWN)) {
-        delete_order_at_floor(current_floor);
+    if ((orders[current_floor][0] == 1) ||
+        ((orders[current_floor][1] == 1 && dir == DIRN_UP) &&
+        !(orders_bellow() == 1)) ||
+        ((orders[current_floor][2] == 1 && dir == DIRN_DOWN) &&
+        !(orders_above() == -1))) {
         return 1;
+    }
+    return 0;
+};
+
+int orders_current_floor(){
+    int current_floor;
+    current_floor = elev_get_floor_sensor_signal();
+    if (current_floor != -1){
+        if ((orders[current_floor][0] == 1) ||
+            (orders[current_floor][1] == 1) ||
+            (orders[current_floor][2] == 1)){
+            return 1;
+        }
     }
     return 0;
 };
@@ -192,10 +206,10 @@ int order_lamp(){
     for(int i = 0; i < N_FLOORS; i++){
         elev_set_button_lamp(BUTTON_COMMAND,i,orders[i][0]);
     }
-    for(int j = 0; j < N_FLOORS; j++){
+    for(int j = 0; j < N_FLOORS -1 ; j++){
         elev_set_button_lamp(BUTTON_CALL_UP,j,orders[j][1]);
     }
-    for(int k = 0; k < N_FLOORS; k++){
+    for(int k = 1; k < N_FLOORS; k++){
         elev_set_button_lamp(BUTTON_CALL_DOWN,k,orders[k][2]);
     }
     return 1;

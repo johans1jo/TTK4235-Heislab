@@ -1,8 +1,7 @@
 #include "state_machine.h"
-#include "elevsim.h"
+#include "elev.h"
 #include "que.h"
 #include "timer.h"
-#include <stdio.h>
 
 int init(){
     if(0 <= elev_get_floor_sensor_signal()){
@@ -24,7 +23,7 @@ int run(){
         get_new_orders();
         current_floor_lamp();
         order_lamp();
-        
+
         if (elev_get_stop_signal() == 1){
             if (e_stop() == 1){
                 elev_state = DOOR_OPEN;
@@ -37,13 +36,17 @@ int run(){
         switch (elev_state){
             case INIT       :
             init();
-            printf("Initiated");
             elev_state = IDLE;
             break;
 
             case IDLE       :
             current_floor_lamp();
-            if (orders_above() == 1){
+            if (orders_current_floor() == 1){
+                elev_state = DOOR_OPEN;
+                elev_set_door_open_lamp(1);
+                start_timer();
+            }
+            else if (orders_above() == 1){
                 dir = DIRN_UP;
                 elev_set_motor_direction(DIRN_UP);
                 elev_state = RUNNING;
@@ -78,19 +81,22 @@ int run(){
             if (time_out() == 1){
                 delete_order_at_floor(elev_get_floor_sensor_signal());
                 elev_set_door_open_lamp(0);
-                if (dir == DIRN_DOWN && orders_bellow() == 1){
-                    elev_set_motor_direction(DIRN_DOWN);
-                    elev_state = RUNNING;
-                    break;
-                };
-                if (dir == DIRN_UP && orders_above() == 1){
+                if (dir == DIRN_DOWN && orders_above() == -1){
                     elev_set_motor_direction(DIRN_UP);
                     elev_state = RUNNING;
                     break;
                 }
+                else if (dir == DIRN_UP && orders_bellow() == 1){
+                    elev_set_motor_direction(DIRN_DOWN);
+                    elev_state = RUNNING;
+                    break;
+                }
+                else{
+                    dir = DIRN_STOP;
+                }
                 elev_state = IDLE;
             }
-            
+
             break;
         }
     }
