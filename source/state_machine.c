@@ -78,14 +78,14 @@ int run(){
                 elev_state = RUNNING;
             }
             else if (orders_above() == -1){
-                printf("Order above, going down!!\n");
+                printf("Order above, but we are going down!!\n");
                 dir = DIRN_DOWN;
                 motor_dir = DIRN_UP;
                 elev_set_motor_direction(DIRN_UP);
                 elev_state = RUNNING;
             }
             else if (orders_bellow() == 1){
-                printf("Order bellow, going up!!\n");
+                printf("Order bellow, but we are going up!!\n");
                 dir = DIRN_UP;
                 motor_dir = DIRN_DOWN;
                 elev_set_motor_direction(DIRN_DOWN);
