@@ -63,7 +63,7 @@ int update_elev_postition(){
     return 1;
 };
 
-int order_at_floor(elev_motor_direction_t priority_dir, elev_motor_direction_t elev_dir){
+int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t elev_dir){
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
     if(current_floor != -1){
@@ -73,14 +73,14 @@ int order_at_floor(elev_motor_direction_t priority_dir, elev_motor_direction_t e
             //If UP order & (elev_dir = DOWN & priority_dir = UP & no one bellow is going up ||
             //              (elev_dir = UP & priority_dir = UP))
             (orders[current_floor][1] == 1 && 
-            ((elev_dir == DIRN_DOWN && priority_dir == DIRN_UP && orders_bellow(priority_dir, current_floor) != 1) ||
-            (elev_dir == DIRN_UP && priority_dir == DIRN_UP))
+            ((elev_dir == DIRN_DOWN && *priority_dir == DIRN_UP && orders_bellow(priority_dir, current_floor) != 1) ||
+            (elev_dir == DIRN_UP && *priority_dir == DIRN_UP)))
             ||
             //If DOWN order & (elev_dir = UP & priority_dir = DOWN & no one above is going down ||
             //              (elev_dir = DOWN & priority_dir = DOWN))
             (orders[current_floor][2] == 1 && 
-            ((elev_dir == DIRN_UP && priority_dir == DIRN_DOWN && orders_above(priority_dir, current_floor) != 1) ||
-            (elev_dir == DIRN_DOWN && priority_dir == DIRN_DOWN))))) {
+            ((elev_dir == DIRN_UP && *priority_dir == DIRN_DOWN && orders_above(priority_dir, current_floor) != 1) ||
+            (elev_dir == DIRN_DOWN && *priority_dir == DIRN_DOWN)))) {
                 return 1;
                 }
     }
@@ -97,40 +97,61 @@ int order_at_current_floor(int current_floor){
     return 0;
 };
 
-int orders_bellow(elev_motor_direction_t priority_dir, int current_floor){
-    for (int floor = 0; floor < current_floor; floor++) {
-      //If UP order
-        if (orders[floor][1] == 1) {
-            return 1;
+int orders_bellow(elev_motor_direction_t * priority_dir, int current_floor){
+    if (*priority_dir == DIRN_STOP){
+        for (int floor = 0; floor < current_floor; floor++) {
+            if (orders[floor][0] == 1 || orders[floor][2] == 1){
+                *priority_dir = DIRN_DOWN;
+                return 1;
+            }
+            if (orders[floor][1] == 1){
+                *priority_dir = DIRN_UP;
+                return 1;
+            }
         }
-        //If DOWN
-        if (orders[floor][2] == 1) {
-            return 1;
-        }
-        if (orders[floor][0] == 1){
-            return 2;
+    }
+    else{
+        for (int floor = 0; floor < current_floor; floor++) {
+            //If UP order
+            if (orders[floor][1] == 1 && *priority_dir == DIRN_UP) {
+                return 1;
+            }
+            //If DOWN
+            if (orders[floor][2] == 1 && *priority_dir == DIRN_DOWN) {
+                return 1;
+            }
         }
     }
     return 0;
 };
 
-int orders_above(elev_motor_direction_t priority_dir, int current_floor){
-    for (int floor = 3; floor > current_floor; floor--) {
-        //If UP
-        if (orders[floor][1] == 1) {
-            return 1;
+int orders_above(elev_motor_direction_t * priority_dir, int current_floor){
+    if (priority_dir == DIRN_STOP){
+        for (int floor = 0; floor < current_floor; floor++) {
+            if (orders[floor][0] == 1 || orders[floor][1] == 1){
+                *priority_dir = DIRN_UP;
+                return 1;
+            }
+            if (orders[floor][2] == 1){
+                *priority_dir = DIRN_DOWN;
+                return 1;
+            }
         }
-        //If DOWN
-        if (orders[floor][2] == 1) {
-            return -1;
-        }
-        if (orders[floor][0] == 1){
-            return 2;
+    }
+    else{
+        for (int floor = 3; floor > current_floor; floor--) {
+            //If UP order
+            if (orders[floor][1] == 1 && *priority_dir == DIRN_UP) {
+                return 1;
+            }
+            //If DOWN
+            if (orders[floor][2] == 1 && *priority_dir == DIRN_DOWN) {
+                return 1;
+            }
         }
     }
     return 0;
 };
-
 
 int e_stop(){
     elev_set_motor_direction(DIRN_STOP);

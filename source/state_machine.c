@@ -24,7 +24,7 @@ int run(){
 
     while (1){
         update_orders();
-        update_floor_array();
+        update_elev_postition();
         update_lamps();
 
         switch (elev_state){
@@ -34,11 +34,43 @@ int run(){
             break;
 
             case IDLE       :
-            current_floor_lamp();
-            
+             /*if (order_at_current_floor(current_floor) == 1){
+                printf("Order at current floor??\n");
+                if (elev_dir == DIRN_UP && e_stopped == 1){
+                    priority_dir = DIRN_UP;
+                    elev_dir = DIRN_DOWN;
+                    elev_set_motor_direction(elev_dir);
+                    elev_state = RUNNING;
+                }
+                else if (elev_dir == DIRN_DOWN && e_stopped == 1){
+                    priority_dir = DIRN_DOWN;
+                    elev_dir = DIRN_UP;
+                    elev_set_motor_direction(elev_dir);
+                    elev_state = RUNNING;
+                }
+                else{
+                    elev_state = DOOR_OPEN;
+                    elev_set_door_open_lamp(1);
+                    start_timer();
+                }
+
+            }
+            else */if (orders_above(&priority_dir, current_floor) == 1){
+                printf("Order above, going up!!\n");
+                elev_dir = DIRN_UP;
+                elev_set_motor_direction(DIRN_UP);
+                elev_state = RUNNING;
+            }
+            else if (orders_bellow(&priority_dir, current_floor) == 1){
+                printf("Order bellow, going down!!\n");
+                elev_dir = DIRN_DOWN;
+                elev_set_motor_direction(DIRN_DOWN);
+                elev_state = RUNNING;
+            }            
             break;
 
             case RUNNING    :
+            printf("Running AF\n");
             break;
 
             case DOOR_OPEN  :
