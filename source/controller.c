@@ -70,17 +70,18 @@ int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t
             //If CAB order
         if ((orders[current_floor][0] == 1)
             ||
-            //If UP order & (elev_dir = DOWN & priority_dir = UP & no one bellow is going up ||
-            //              (elev_dir = UP & priority_dir = UP))
+            //If UP order & ((elev_dir = DOWN & priority_dir = UP & no one bellow is going up) ||
+            //              (elev_dir = UP & priority_dir = UP) ||
+            //              (elev_dir = UP))
             (orders[current_floor][1] == 1 && 
             ((elev_dir == DIRN_DOWN && *priority_dir == DIRN_UP && orders_bellow(priority_dir, current_floor) != 1) ||
-            (elev_dir == DIRN_UP && *priority_dir == DIRN_UP)))
+            (elev_dir == DIRN_UP && *priority_dir == DIRN_UP) || elev_dir == DIRN_UP))
             ||
             //If DOWN order & (elev_dir = UP & priority_dir = DOWN & no one above is going down ||
             //              (elev_dir = DOWN & priority_dir = DOWN))
             (orders[current_floor][2] == 1 && 
             ((elev_dir == DIRN_UP && *priority_dir == DIRN_DOWN && orders_above(priority_dir, current_floor) != 1) ||
-            (elev_dir == DIRN_DOWN && *priority_dir == DIRN_DOWN)))) {
+            (elev_dir == DIRN_DOWN && *priority_dir == DIRN_DOWN) || elev_dir == DIRN_DOWN))) {
                 return 1;
                 }
     }
@@ -126,8 +127,8 @@ int orders_bellow(elev_motor_direction_t * priority_dir, int current_floor){
 };
 
 int orders_above(elev_motor_direction_t * priority_dir, int current_floor){
-    if (priority_dir == DIRN_STOP){
-        for (int floor = 0; floor < current_floor; floor++) {
+    if (*priority_dir == DIRN_STOP){
+        for (int floor = N_FLOORS - 1; floor > current_floor; floor--) {
             if (orders[floor][0] == 1 || orders[floor][1] == 1){
                 *priority_dir = DIRN_UP;
                 return 1;
@@ -139,7 +140,7 @@ int orders_above(elev_motor_direction_t * priority_dir, int current_floor){
         }
     }
     else{
-        for (int floor = 3; floor > current_floor; floor--) {
+        for (int floor = N_FLOORS - 1; floor > current_floor; floor--) {
             //If UP order
             if (orders[floor][1] == 1 && *priority_dir == DIRN_UP) {
                 return 1;

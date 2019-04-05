@@ -19,13 +19,17 @@ int run(){
     states_t elev_state = INIT;
     elev_motor_direction_t priority_dir = DIRN_STOP;
     elev_motor_direction_t elev_dir = DIRN_STOP;
-    int e_stopped = 0;
+    //int e_stopped = 0;
     int current_floor = 1;
 
     while (1){
         update_orders();
         update_elev_postition();
         update_lamps();
+
+        if (elev_get_floor_sensor_signal() != -1){
+            current_floor = elev_get_floor_sensor_signal();
+        }
 
         switch (elev_state){
             case INIT       :
@@ -49,13 +53,11 @@ int run(){
                     elev_state = RUNNING;
                 }
                 else{
-                    elev_state = DOOR_OPEN;
-                    elev_set_door_open_lamp(1);
-                    start_timer();
                 }
 
             }
-            else */if (orders_above(&priority_dir, current_floor) == 1){
+            else */
+            if (orders_above(&priority_dir, current_floor) == 1){
                 printf("Order above, going up!!\n");
                 elev_dir = DIRN_UP;
                 elev_set_motor_direction(DIRN_UP);
@@ -70,10 +72,22 @@ int run(){
             break;
 
             case RUNNING    :
-            printf("Running AF\n");
+            if (order_at_floor(&priority_dir, elev_dir) == 1){
+                elev_set_motor_direction(DIRN_STOP);
+                elev_state = DOOR_OPEN;
+                elev_set_door_open_lamp(1);
+                start_timer();
+            }
             break;
 
             case DOOR_OPEN  :
+            delete_order_at_floor(current_floor);
+            if (time_out() == 1){
+                elev_set_door_open_lamp(0);
+                elev_state = IDLE;
+                priority_dir = DIRN_STOP;
+            }
+
             break;
         }
     }
