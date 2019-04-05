@@ -17,18 +17,15 @@ int init(){
 
 int run(){
     states_t elev_state = INIT;
-    elev_motor_direction_t dir = DIRN_STOP;
-    elev_motor_direction_t motor_dir = DIRN_STOP;
+    elev_motor_direction_t priority_dir = DIRN_STOP;
+    elev_motor_direction_t elev_dir = DIRN_STOP;
     int e_stopped = 0;
     int current_floor = 1;
 
     while (1){
         update_orders();
-        if (update_elev_postition() != -1){
-            current_floor = update_floor_array();
-        }
-        current_floor_lamp();
-        order_lamp();
+        update_floor_array();
+        update_lamps();
 
         switch (elev_state){
             case INIT       :
@@ -38,6 +35,7 @@ int run(){
 
             case IDLE       :
             current_floor_lamp();
+            
             break;
 
             case RUNNING    :

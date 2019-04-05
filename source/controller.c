@@ -63,21 +63,28 @@ int update_elev_postition(){
     return 1;
 };
 
-int order_at_floor(elev_motor_direction_t dir, elev_motor_direction_t motor_dir){
-    //If order matching "dir" at current floor -> stop elevator
+int order_at_floor(elev_motor_direction_t priority_dir, elev_motor_direction_t elev_dir){
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
     if(current_floor != -1){
+            //If CAB order
         if ((orders[current_floor][0] == 1)
             ||
-            (orders[current_floor][1] == 1 && dir == DIRN_UP &&
-            orders_bellow(current_floor) != 1)
+            //If UP order & (elev_dir = DOWN & priority_dir = UP & no one bellow is going up ||
+            //              (elev_dir = UP & priority_dir = UP))
+            (orders[current_floor][1] == 1 && 
+            ((elev_dir == DIRN_DOWN && priority_dir == DIRN_UP && orders_bellow(priority_dir, current_floor) != 1) ||
+            (elev_dir == DIRN_UP && priority_dir == DIRN_UP))
             ||
-            (orders[current_floor][2] == 1 && dir == DIRN_DOWN &&
-            orders_above(current_floor) != -1)) {
+            //If DOWN order & (elev_dir = UP & priority_dir = DOWN & no one above is going down ||
+            //              (elev_dir = DOWN & priority_dir = DOWN))
+            (orders[current_floor][2] == 1 && 
+            ((elev_dir == DIRN_UP && priority_dir == DIRN_DOWN && orders_above(priority_dir, current_floor) != 1) ||
+            (elev_dir == DIRN_DOWN && priority_dir == DIRN_DOWN))))) {
                 return 1;
                 }
-            }
+    }
+    //If none is true the go on
     return 0;
 };
 
@@ -90,7 +97,7 @@ int order_at_current_floor(int current_floor){
     return 0;
 };
 
-int orders_bellow(int current_floor){
+int orders_bellow(elev_motor_direction_t priority_dir, int current_floor){
     for (int floor = 0; floor < current_floor; floor++) {
       //If UP order
         if (orders[floor][1] == 1) {
@@ -98,7 +105,7 @@ int orders_bellow(int current_floor){
         }
         //If DOWN
         if (orders[floor][2] == 1) {
-            return -1;
+            return 1;
         }
         if (orders[floor][0] == 1){
             return 2;
@@ -107,7 +114,7 @@ int orders_bellow(int current_floor){
     return 0;
 };
 
-int orders_above(int current_floor){
+int orders_above(elev_motor_direction_t priority_dir, int current_floor){
     for (int floor = 3; floor > current_floor; floor--) {
         //If UP
         if (orders[floor][1] == 1) {
@@ -145,16 +152,12 @@ int e_stop(){
 
 };
 
-int current_floor_lamp(){
+int update_lamps(){
     for(int i = 0; i < N_FLOORS; i++){
         if (orders[i][3] == 1){
             elev_set_floor_indicator(i);
         }
     }
-    return 1;
-}
-
-int order_lamp(){
     for(int i = 0; i < N_FLOORS; i++){
         elev_set_button_lamp(BUTTON_COMMAND,i,orders[i][0]);
     }

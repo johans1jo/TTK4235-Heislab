@@ -11,7 +11,7 @@ int delete_all_orders();
 //Checkes alle buttons and updates order list
 int update_orders();
 
-//Checks if orders at current floor
+//Checks if it should stop for an order
 // returns 1 if true
 int order_at_floor(elev_motor_direction_t dir, elev_motor_direction_t motor_dir);
 
@@ -23,17 +23,15 @@ int order_at_current_floor(int current_floor);
 
 //Check orders bellow
 //returns 1 if BUTTON_UP is true, -1 if BUTTON_DOWN or BUTTON_COMMAND is true
-int orders_bellow(int current_floor);
+int orders_bellow(elev_motor_direction_t priority_dir, int current_floor);
 
 //Check orders above
 //returns 1 if BUTTON_UP or BUTTON_COMMAND is true, -1 if BUTTON_DOWN is true
-int orders_above(int current_floor);
+int orders_above(elev_motor_direction_t priority_dir, int current_floor);
 
 //cheking emergency stop
 //returns 1 if true
 int e_stop();
 
 /*sets the lamp of the current and last floor the elevator visited*/
-int current_floor_lamp();
-/*sets the lamp when orders are activated, and deletes them when they are complited*/
-int order_lamp();
+int update_lamps();
