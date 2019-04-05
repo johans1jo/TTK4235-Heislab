@@ -9,17 +9,17 @@ int delete_order_at_floor(int floor);
 int delete_all_orders();
 
 //Checkes alle buttons and updates order list
-int get_new_orders();
+int update_orders();
 
 //Checks if orders at current floor
 // returns 1 if true
 int order_at_floor(elev_motor_direction_t dir, elev_motor_direction_t motor_dir);
 
+int update_elev_postition();
+
 //Check orders in current floor
 //returns 1 if true
-int orders_current_floor(int current_floor);
-
-int update_floor_array();
+int order_at_current_floor(int current_floor);
 
 //Check orders bellow
 //returns 1 if BUTTON_UP is true, -1 if BUTTON_DOWN or BUTTON_COMMAND is true

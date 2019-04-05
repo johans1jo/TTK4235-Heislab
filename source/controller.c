@@ -27,15 +27,7 @@ int delete_all_orders(){
     return 0;
 };
 
-int get_new_orders(){
-    /*for (int i = 0; i < 4; i++){
-        printf("%d. etg: ", i+1);
-        for (int j = 0; j < 4; j++){
-            printf("%d", orders[i][j]);
-        }
-        printf("\n");
-    }*/
-
+int update_orders(){
     //if the CAB button is pushed, update the order
     for (int i = 0; i < N_FLOORS; i++){
         if (elev_get_button_signal(BUTTON_COMMAND, i)){
@@ -58,7 +50,7 @@ int get_new_orders(){
     return 1;
 };
 
-int update_floor_array(){
+int update_elev_postition(){
     //Checking floor sensors and updating orders array if a sensor is at high state
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
@@ -67,9 +59,8 @@ int update_floor_array(){
             orders[i][3] = 0;
         }
         orders[current_floor][3] = 1;
-        return current_floor;
     }
-    return -1;
+    return 1;
 };
 
 int order_at_floor(elev_motor_direction_t dir, elev_motor_direction_t motor_dir){
@@ -90,14 +81,11 @@ int order_at_floor(elev_motor_direction_t dir, elev_motor_direction_t motor_dir)
     return 0;
 };
 
-int orders_current_floor(int current_floor){
-    //current_floor = elev_get_floor_sensor_signal();
-    if (current_floor != -1){
-        if ((orders[current_floor][0] == 1) ||
-            (orders[current_floor][1] == 1) ||
-            (orders[current_floor][2] == 1)){
-            return 1;
-        }
+int order_at_current_floor(int current_floor){
+    if ((orders[current_floor][0] == 1) ||
+        (orders[current_floor][1] == 1) ||
+        (orders[current_floor][2] == 1)){
+        return 1;
     }
     return 0;
 };
