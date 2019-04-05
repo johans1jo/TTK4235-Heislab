@@ -72,16 +72,18 @@ int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t
             ||
             //If UP order & ((elev_dir = DOWN & priority_dir = UP & no one bellow is going up) ||
             //              (elev_dir = UP & priority_dir = UP) ||
-            //              (elev_dir = UP))
+            //              (elev_dir = UP) ||
+            //              (priority_dir = STOP))
             (orders[current_floor][1] == 1 && 
             ((elev_dir == DIRN_DOWN && *priority_dir == DIRN_UP && orders_bellow(priority_dir, current_floor) != 1) ||
-            (elev_dir == DIRN_UP && *priority_dir == DIRN_UP) || elev_dir == DIRN_UP))
+            (elev_dir == DIRN_UP && *priority_dir == DIRN_UP) || elev_dir == DIRN_UP || *priority_dir == DIRN_STOP))
             ||
             //If DOWN order & (elev_dir = UP & priority_dir = DOWN & no one above is going down ||
-            //              (elev_dir = DOWN & priority_dir = DOWN))
+            //              (elev_dir = DOWN & priority_dir = DOWN) ||
+            //              (priority_dir = STOP))
             (orders[current_floor][2] == 1 && 
             ((elev_dir == DIRN_UP && *priority_dir == DIRN_DOWN && orders_above(priority_dir, current_floor) != 1) ||
-            (elev_dir == DIRN_DOWN && *priority_dir == DIRN_DOWN) || elev_dir == DIRN_DOWN))) {
+            (elev_dir == DIRN_DOWN && *priority_dir == DIRN_DOWN) || elev_dir == DIRN_DOWN || *priority_dir == DIRN_STOP))) {
                 return 1;
                 }
     }
@@ -89,11 +91,35 @@ int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t
     return 0;
 };
 
-int order_at_current_floor(int current_floor){
+int order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int current_floor, int * dir_switch){
     if ((orders[current_floor][0] == 1) ||
         (orders[current_floor][1] == 1) ||
         (orders[current_floor][2] == 1)){
-        return 1;
+        if (e_stopped == 1 && elev_dir == DIRN_DOWN && *dir_switch == 0){
+            printf("Switcher 1\n");
+            //elev_dir = DIRN_UP;
+            *dir_switch = 1;
+            return 2;
+        }
+        else if (*dir_switch == 1 && elev_dir == DIRN_UP){
+            printf("Fortsetter 1\n");
+            //elev_dir = DIRN_UP;
+            return 3;
+        }
+        else if (e_stopped == 1 && elev_dir == DIRN_UP && *dir_switch == 0){
+            printf("Switcher 2\n");
+            //elev_dir = DIRN_DOWN;
+            *dir_switch = 1;
+            return -3;
+        }
+        else if (*dir_switch == 1 && elev_dir == DIRN_DOWN){
+            printf("Fortsetter 2\n");
+            //elev_dir = DIRN_DOWN;
+            return -2;
+        }
+        else {
+            return 1;
+        }
     }
     return 0;
 };
@@ -154,24 +180,31 @@ int orders_above(elev_motor_direction_t * priority_dir, int current_floor){
     return 0;
 };
 
-int e_stop(){
-    elev_set_motor_direction(DIRN_STOP);
-    delete_all_orders();
-    elev_set_stop_lamp(1);
-    if (elev_get_floor_sensor_signal() != -1){
-        elev_set_door_open_lamp(1);
-    }
-    while(elev_get_stop_signal() != 0){};
-    elev_set_stop_lamp(0);
-    start_timer();
-
-    if (elev_get_floor_sensor_signal() != -1){
-        return 1;
+int e_stop(int * e_stopped, elev_motor_direction_t * elev_dir, elev_motor_direction_t * priority_dir, states_t * elev_state){
+    if (elev_get_stop_signal() == 1) {
+        elev_set_motor_direction(DIRN_STOP);
+        delete_all_orders();
+        elev_set_stop_lamp(1);
+        *priority_dir = DIRN_STOP;
+        if (elev_get_floor_sensor_signal() != -1){
+            elev_set_door_open_lamp(1);
         }
-    else {
-        return 0;
-    }
+        while(elev_get_stop_signal() != 0){};
+        elev_set_stop_lamp(0);
 
+        if (elev_get_floor_sensor_signal() != -1){
+            start_timer();
+            *elev_state = DOOR_OPEN;
+        }
+        else {
+            *elev_state = IDLE;
+        }
+
+        *e_stopped = 1 ;
+
+        return 1;
+    }
+    return 0;
 };
 
 int update_lamps(){
