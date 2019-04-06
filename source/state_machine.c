@@ -29,7 +29,6 @@ int run(){
         update_lamps();
         
         e_stop(&e_stopped, &elev_dir, &priority_dir, &elev_state);
-        //printf("%d\n", elev_dir);
 
         if (elev_get_floor_sensor_signal() != -1){
             current_floor = elev_get_floor_sensor_signal();
