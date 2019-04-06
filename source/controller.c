@@ -227,5 +227,5 @@ int update_lamps(){
     for(int k = 1; k < N_FLOORS; k++){
         elev_set_button_lamp(BUTTON_CALL_DOWN,k,orders[k][2]);
     }
-    return 0;
+    return 1;
 }

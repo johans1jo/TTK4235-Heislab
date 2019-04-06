@@ -13,11 +13,7 @@ int init(){
     }
     return 1;
 }
-<<<<<<< HEAD
-/kommentar
-=======
-//Siri kommenterer
->>>>>>> comments_by_Siri
+
 int run(){
     states_t elev_state = INIT;
     elev_motor_direction_t priority_dir = DIRN_STOP;

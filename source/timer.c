@@ -2,11 +2,11 @@
 
 
 void start_timer(){
-    g_before = time(NULL);
+    before = time(NULL);
 }
 int time_out(){
     int trigger = 3;
-    double sec = difftime(time(NULL), g_before);
+    double sec = difftime(time(NULL), before);
     if (sec < trigger){
         return 0;
     } else {
