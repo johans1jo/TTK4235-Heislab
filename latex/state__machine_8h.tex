@@ -1,0 +1,85 @@
+\hypertarget{state__machine_8h}{}\section{source/state\+\_\+machine.h File Reference}
+\label{state__machine_8h}\index{source/state\+\_\+machine.\+h@{source/state\+\_\+machine.\+h}}
+
+
+This module contains the state machine ant the initialize function.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+Include dependency graph for state\+\_\+machine.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum states {\bfseries states\+\_\+t}\hypertarget{state__machine_8h_afe776354e225815b2fdb1308becfa9d0}{}\label{state__machine_8h_afe776354e225815b2fdb1308becfa9d0}
+
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries states} \{ \\*
+{\bfseries I\+N\+IT} = 0, 
+{\bfseries I\+D\+LE}, 
+{\bfseries R\+U\+N\+N\+I\+NG}, 
+{\bfseries D\+O\+O\+R\+\_\+\+O\+P\+EN}, 
+\\*
+{\bfseries I\+N\+IT} = 0, 
+{\bfseries I\+D\+LE}, 
+{\bfseries R\+U\+N\+N\+I\+NG}, 
+{\bfseries D\+O\+O\+R\+\_\+\+O\+P\+EN}
+ \}\hypertarget{state__machine_8h_aa19be6305a5a4485e1e70de70ed7d677}{}\label{state__machine_8h_aa19be6305a5a4485e1e70de70ed7d677}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{state__machine_8h_a05848de25ac2dbec233935058a1d24b4}{init} ()
+\begin{DoxyCompactList}\small\item\em Initializes the elevator by placing it at a known floor. \end{DoxyCompactList}\item 
+int \hyperlink{state__machine_8h_a58e8be2db2660128e4e6456a9c981fb5}{run} ()
+\begin{DoxyCompactList}\small\item\em This is the state machine. Just run it from main and watch the magic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This module contains the state machine ant the initialize function. 
+
+
+
+\subsection{Function Documentation}
+\index{state\+\_\+machine.\+h@{state\+\_\+machine.\+h}!init@{init}}
+\index{init@{init}!state\+\_\+machine.\+h@{state\+\_\+machine.\+h}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}int init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{state__machine_8h_a05848de25ac2dbec233935058a1d24b4}{}\label{state__machine_8h_a05848de25ac2dbec233935058a1d24b4}
+
+
+Initializes the elevator by placing it at a known floor. 
+
+\begin{DoxyReturn}{Returns}
+0 when done. 
+\end{DoxyReturn}
+
+
+Definition at line 5 of file state\+\_\+machine.\+c.
+
+\index{state\+\_\+machine.\+h@{state\+\_\+machine.\+h}!run@{run}}
+\index{run@{run}!state\+\_\+machine.\+h@{state\+\_\+machine.\+h}}
+\subsubsection[{\texorpdfstring{run()}{run()}}]{\setlength{\rightskip}{0pt plus 5cm}int run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{state__machine_8h_a58e8be2db2660128e4e6456a9c981fb5}{}\label{state__machine_8h_a58e8be2db2660128e4e6456a9c981fb5}
+
+
+This is the state machine. Just run it from main and watch the magic. 
+
+\begin{DoxyReturn}{Returns}
+0 when done. 
+\end{DoxyReturn}
+
+
+Definition at line 17 of file state\+\_\+machine.\+c.
+
