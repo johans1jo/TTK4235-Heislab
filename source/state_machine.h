@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief This module contains the state machine ant the initialize function.
+ */
 #include <stdio.h>
 
 
@@ -8,8 +12,16 @@ typedef enum states {
     DOOR_OPEN
 } states_t;
 
-//Initializes the elevator;
-//puts it at a random floor and returns 1
+/**
+ * @brief Initializes the elevator by placing it at a known floor.
+ * 
+ * @return 0 when done.
+ */
 int init();
 
+/**
+ * @brief This is the state machine. Just run it from main and watch the magic.
+ * 
+ * @return 0 when done.
+ */
 int run();

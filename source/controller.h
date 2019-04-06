@@ -1,32 +1,84 @@
+/**
+ * @file
+ * @brief This library contains the logic that controls the elevator movements
+ */
+
 #include "elev.h"
 #include "timer.h"
 #include "state_machine.h"
 
-//Deletes all orders at one floor
+/**
+ * @brief Deletes all orders at a floor.
+ * 
+ * @param[in] floor Where orderes wil be destructed.
+ * 
+ * @return 0 when done
+ */
 int delete_order_at_floor(int floor);
 
-//Deletes all orders
+/**
+ * @brief Deletes all orders at all floors.
+ * 
+ * @return 0 when done.
+ */
 int delete_all_orders();
 
-//Checkes alle buttons and updates order list
+/**
+ * @brief Checking buttons: COMMAND, UP and DOWN and updates the ordes array.
+ * 
+ * @return 0 when done.
+ */
 int update_orders();
 
-//Checks if it should stop for an order
-// returns 1 if true
+/**
+ * @brief Checking if there are orders at current floor and if the eleveator should stop.
+ * It also checks if the elevator is about to move bellow the bootom floor or 
+ * above the top floor.
+ * 
+ * @param[in] p_priority_dir Orders in this direction is prioritized.
+ * @param[in] elev_dir The elevators direction of movement.
+ * 
+ * @return 0 when done.
+ */
 int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t elev_dir);
+
 
 int update_elev_postition();
 
-//Check orders in current floor
-//returns 1 if true
+/**
+ * @brief Used to check if the order is at the current floor so the elev can open the doors. It is also
+ * used to check if the elevator is actually at the floor it thinks it is after an emergency stop and if
+ * the elevator switched direction to get back to the floor it thinks it is at.
+ * 
+ * @param[in] elev_dir The elevators direction of movement.
+ * @param[in] e_stopped 0 or not 0 integer to tell if an emergency stop has occured.
+ * @param[in] current_floor The floor which the elevator last moved by.
+ * @param[in, out] p_dir_switch A variable to tell if the elevator has switched direction after an emergency stop occured.
+ * 
+ * @return 2 or 3 if elev should move up, -2 or -3 if elev should move down, 1 if the doors should open or 0 if nothing should be done.
+ * 
+ * @warning When called this function may change @p p_dir_switch and therfore the next call will give a diffrent result.
+ */
 int order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int current_floor, int * dir_switch);
 
-//Check orders bellow
-//returns 1 if BUTTON_UP is true, -1 if BUTTON_DOWN or BUTTON_COMMAND is true
+/**
+ * @brief Checks if there are any orders of interest above current floor.
+ * 
+ * @param[in, out] p_priority_dir Orders in this direction is prioritized. If this equals DIRN_STOP this function may change it.
+ * @param[in] current_floor The floor which the elevator last moved by.
+ * 
+ * @return 1 if order of interest bellow, 0 if not.
+ */
 int orders_bellow(elev_motor_direction_t * priority_dir, int current_floor);
 
-//Check orders above
-//returns 1 if BUTTON_UP or BUTTON_COMMAND is true, -1 if BUTTON_DOWN is true
+/**
+ * @brief Checks if there are any orders of interest above current floor.
+ * 
+ * @param[in, out] p_priority_dir Orders in this direction is prioritized. If this equals DIRN_STOP this function may change it.
+ * @param[in] current_floor The floor which the elevator last moved by.
+ * 
+ * @return 1 if order of interest above, 0 if not.
+ */
 int orders_above(elev_motor_direction_t * priority_dir, int current_floor);
 
 //cheking emergency stop

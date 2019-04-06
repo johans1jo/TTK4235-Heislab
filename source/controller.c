@@ -47,7 +47,7 @@ int update_orders(){
         }
     }
 
-    return 1;
+    return 0;
 };
 
 int update_elev_postition(){

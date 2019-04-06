@@ -4,14 +4,14 @@
 
 int init(){
     if(0 <= elev_get_floor_sensor_signal()){
-        return 1;
+        return 0;
     }
     else if (elev_get_floor_sensor_signal() == -1){
         elev_set_motor_direction(DIRN_DOWN);
         while (elev_get_floor_sensor_signal() == -1){};
         elev_set_motor_direction(DIRN_STOP);
     }
-    return 1;
+    return 0;
 }
 //Jo kommenterer
 int run(){
@@ -113,4 +113,5 @@ int run(){
             break;
         }
     }
+    return 0;
 }
