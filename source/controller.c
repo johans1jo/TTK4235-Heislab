@@ -87,6 +87,11 @@ int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t
                 return 1;
                 }
     }
+    //If elev wants to go out of bounderies then stop
+    if ((elev_get_floor_sensor_signal() == 3 && elev_dir == DIRN_UP) ||
+        (elev_get_floor_sensor_signal() == 0 && elev_dir == DIRN_DOWN)){
+        return 1;
+    }
     //If none is true the go on
     return 0;
 };
