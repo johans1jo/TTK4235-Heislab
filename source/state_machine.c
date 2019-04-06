@@ -1,4 +1,3 @@
-#include "state_machine.h"
 #include "elev.h"
 #include "controller.h"
 #include "timer.h"
@@ -17,31 +16,22 @@ int init(){
 
 int run(){
     states_t elev_state = INIT;
-    elev_motor_direction_t dir = DIRN_STOP;
-    elev_motor_direction_t motor_dir = DIRN_STOP;
+    elev_motor_direction_t priority_dir = DIRN_STOP;
+    elev_motor_direction_t elev_dir = DIRN_STOP;
+    int dir_switch = 0;
     int e_stopped = 0;
     int current_floor = 1;
+    int what_to_do;
 
     while (1){
-        get_new_orders();
-        if (update_floor_array() != -1){
-            current_floor = update_floor_array();
-        }
-        current_floor_lamp();
-        order_lamp();
+        update_orders();
+        update_elev_postition();
+        update_lamps();
+        
+        e_stop(&e_stopped, &elev_dir, &priority_dir, &elev_state);
 
-        if (elev_get_stop_signal() == 1){
-            dir = DIRN_STOP;
-            printf("Emergency, stop, stop\n");
-            if (e_stop() == 1){
-                elev_state = DOOR_OPEN;
-                printf("3 sec left...\n");
-            }
-            else{
-                printf("Going back to idle\n");
-                e_stopped = 1;
-                elev_state = IDLE;
-            }
+        if (elev_get_floor_sensor_signal() != -1){
+            current_floor = elev_get_floor_sensor_signal();
         }
 
         switch (elev_state){
@@ -51,108 +41,75 @@ int run(){
             break;
 
             case IDLE       :
-            current_floor_lamp();
-            if (orders_current_floor(current_floor) == 1){
-                printf("Order at current floor??\n");
-                if (motor_dir == DIRN_UP && e_stopped == 1){
-                    dir = DIRN_UP;
-                    motor_dir = DIRN_DOWN;
-                    elev_set_motor_direction(motor_dir);
-                    elev_state = RUNNING;
-                }
-                else if (motor_dir == DIRN_DOWN && e_stopped == 1){
-                    dir = DIRN_DOWN;
-                    motor_dir = DIRN_UP;
-                    elev_set_motor_direction(motor_dir);
-                    elev_state = RUNNING;
-                }
-                else{
-                    elev_state = DOOR_OPEN;
-                    elev_set_door_open_lamp(1);
-                    start_timer();
-                }
+            what_to_do = order_at_current_floor(elev_dir, e_stopped, current_floor, &dir_switch);
+            if (what_to_do == 1){
+                elev_state = DOOR_OPEN;
+                elev_set_door_open_lamp(1);
+                start_timer();
+            }
+            else if(what_to_do == 2 || what_to_do == 3){
+                printf("Restoring from emergency, going UP\n");
+                elev_dir = DIRN_UP;
+                elev_set_motor_direction(elev_dir);
+                elev_state = RUNNING;
 
             }
-            else if (orders_above(current_floor) == 1 || orders_above(current_floor) == 2){
+            else if(what_to_do == -2 || what_to_do == -3){
+                printf("Restoring from emergency, going DOWN\n");
+                elev_dir = DIRN_DOWN;
+                elev_set_motor_direction(elev_dir);
+                elev_state = RUNNING;
+
+            }
+            else if (orders_above(&priority_dir, current_floor) == 1){
                 printf("Order above, going up!!\n");
-                dir = DIRN_UP;
-                motor_dir = DIRN_UP;
-                elev_set_motor_direction(DIRN_UP);
+                elev_dir = DIRN_UP;
+                elev_set_motor_direction(elev_dir);
                 elev_state = RUNNING;
             }
-            else if (orders_above(current_floor) == -1){
-                printf("Order above, but we are going down!!\n");
-                dir = DIRN_DOWN;
-                motor_dir = DIRN_UP;
-                elev_set_motor_direction(DIRN_UP);
-                elev_state = RUNNING;
-            }
-            else if (orders_bellow(current_floor) == 1){
-                printf("Order bellow, but we are going up!!\n");
-                dir = DIRN_UP;
-                motor_dir = DIRN_DOWN;
-                elev_set_motor_direction(DIRN_DOWN);
-                elev_state = RUNNING;
-            }
-            else if (orders_bellow(current_floor) == -1 ||
-                  orders_bellow(current_floor) == 2){
+            else if (orders_bellow(&priority_dir, current_floor) == 1){
                 printf("Order bellow, going down!!\n");
-                dir = DIRN_DOWN;
-                motor_dir = DIRN_DOWN;
-                elev_set_motor_direction(DIRN_DOWN);
+                elev_dir = DIRN_DOWN;
+                elev_set_motor_direction(elev_dir);
                 elev_state = RUNNING;
-            }
+            }            
             break;
 
             case RUNNING    :
-            if (order_at_floor(dir, motor_dir) == 1 ||
-                  (elev_get_floor_sensor_signal() != -1 && e_stopped == 1)){
-                motor_dir = DIRN_STOP;
-                e_stopped = 0;
-                elev_set_motor_direction(DIRN_STOP);
+            if (order_at_floor(&priority_dir, elev_dir) == 1){
+                elev_dir = DIRN_STOP;
+                elev_set_motor_direction(elev_dir);
+                elev_state = DOOR_OPEN;
                 elev_set_door_open_lamp(1);
                 start_timer();
-                elev_state = DOOR_OPEN;
-                printf("Door open...\n");
             }
             break;
 
             case DOOR_OPEN  :
+            delete_order_at_floor(current_floor);
+            dir_switch = 0;
+            e_stopped = 0;
             if (time_out() == 1){
-                delete_order_at_floor(elev_get_floor_sensor_signal());
                 elev_set_door_open_lamp(0);
-                if (dir == DIRN_DOWN && orders_bellow(current_floor) == -1){
-                    motor_dir = DIRN_DOWN;
-                    elev_set_motor_direction(DIRN_DOWN);
+                if (orders_bellow(&priority_dir, current_floor) == 1){
+                    elev_dir = DIRN_DOWN;
+                    elev_set_motor_direction(elev_dir);
                     printf("DIRN_DOWN -- BELLOW -1\n");
                     elev_state = RUNNING;
-                    break;
                 }
-                else if (dir == DIRN_DOWN && orders_bellow(current_floor) == 2){
-                    motor_dir = DIRN_DOWN;
-                    elev_set_motor_direction(DIRN_DOWN);
-                    printf("DIRN_DOWN -- BELLOW 2\n");
-                    elev_state = RUNNING;
-                }
-                else if (dir == DIRN_UP && orders_above(current_floor) == 2){
-                    motor_dir = DIRN_UP;
-                    elev_set_motor_direction(DIRN_UP);
-                    printf("DIRN_UP -- ABOVE 2\n");
-                    elev_state = RUNNING;
-                }
-                else if (dir == DIRN_UP && orders_above(current_floor) == 1){
-                    motor_dir = DIRN_UP;
-                    elev_set_motor_direction(DIRN_UP);
+                else if (orders_above(&priority_dir, current_floor) == 1){
+                    elev_dir = DIRN_UP;
+                    elev_set_motor_direction(elev_dir);
                     printf("DIRN_UP -- ABOVE 1\n");
                     elev_state = RUNNING;
-                    break;
                 }
                 else{
                     printf("Taking a rest in idle\n");
-                    dir = DIRN_STOP;
+                    priority_dir = DIRN_STOP;
                     elev_state = IDLE;
                 }
             }
+
             break;
         }
     }
