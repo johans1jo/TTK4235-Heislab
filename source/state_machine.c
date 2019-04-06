@@ -13,7 +13,7 @@ int init(){
     }
     return 1;
 }
-
+//Jo kommenterer
 int run(){
     states_t elev_state = INIT;
     elev_motor_direction_t priority_dir = DIRN_STOP;
