@@ -13,21 +13,21 @@ Floor        BUTTON_COMMAND  BUTTON_CALL_UP  BUTTON_CALL_DOWN    Current floor
 orders[--floor--][--order---]*/
 int orders[4][4] = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
 
-int delete_order_at_floor(int floor){
+int controller_delete_order_at_floor(int floor){
     for (int i = 0; i < 3; i++){
         orders[floor][i] = 0;
     }
     return 0;
 };
 
-int delete_all_orders(){
+int controller_delete_all_orders(){
     for (int i = 0; i < N_FLOORS; i++){
-        delete_order_at_floor(i);
+        controller_delete_order_at_floor(i);
     }
     return 0;
 };
 
-int update_orders(){
+int controller_update_orders(){
     //if the CAB button is pushed, update the order
     for (int i = 0; i < N_FLOORS; i++){
         if (elev_get_button_signal(BUTTON_COMMAND, i)){
@@ -50,14 +50,14 @@ int update_orders(){
     return 1;
 };
 
-int update_elev_postition(int * p_current_floor){
+int controller_update_elev_postition(int * p_current_floor){
 	if (elev_get_floor_sensor_signal() != -1) {
-		*current_floor = elev_get_floor_sensor_signal();
+		*p_current_floor = elev_get_floor_sensor_signal();
 	}
     return 0;
 };
 
-int order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction_t elev_dir){
+int controller_order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction_t elev_dir){
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
     if(current_floor != -1){
@@ -69,14 +69,14 @@ int order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction
             //              (elev_dir = UP) ||
             //              (priority_dir = STOP))
             (orders[current_floor][1] == 1 && 
-            ((elev_dir == DIRN_DOWN && *p_priority_dir == DIRN_UP && orders_bellow(priority_dir, current_floor) != 1) ||
+            ((elev_dir == DIRN_DOWN && *p_priority_dir == DIRN_UP && controller_orders_bellow(p_priority_dir, current_floor) != 1) ||
             (elev_dir == DIRN_UP && *p_priority_dir == DIRN_UP) || elev_dir == DIRN_UP || *p_priority_dir == DIRN_STOP))
             ||
             //If DOWN order & (elev_dir = UP & priority_dir = DOWN & no one above is going down ||
             //              (elev_dir = DOWN & priority_dir = DOWN) ||
             //              (priority_dir = STOP))
             (orders[current_floor][2] == 1 && 
-            ((elev_dir == DIRN_UP && *p_priority_dir == DIRN_DOWN && orders_above(priority_dir, current_floor) != 1) ||
+            ((elev_dir == DIRN_UP && *p_priority_dir == DIRN_DOWN && controller_orders_above(p_priority_dir, current_floor) != 1) ||
             (elev_dir == DIRN_DOWN && *p_priority_dir == DIRN_DOWN) || elev_dir == DIRN_DOWN || *p_priority_dir == DIRN_STOP))) {
                 return 1;
                 }
@@ -90,28 +90,28 @@ int order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction
     return 0;
 };
 
-int order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int current_floor, int * dir_switch){
+int controller_order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int current_floor, int * p_dir_switch){
     if ((orders[current_floor][0] == 1) ||
         (orders[current_floor][1] == 1) ||
         (orders[current_floor][2] == 1)){
-        if (e_stopped == 1 && elev_dir == DIRN_DOWN && *dir_switch == 0){
+        if (e_stopped == 1 && elev_dir == DIRN_DOWN && *p_dir_switch == 0){
             printf("Switcher 1\n");
             //elev_dir = DIRN_UP;
-            *dir_switch = 1;
+            *p_dir_switch = 1;
             return 2;
         }
-        else if (*dir_switch == 1 && elev_dir == DIRN_UP){
+        else if (*p_dir_switch == 1 && elev_dir == DIRN_UP){
             printf("Fortsetter 1\n");
             //elev_dir = DIRN_UP;
             return 3;
         }
-        else if (e_stopped == 1 && elev_dir == DIRN_UP && *dir_switch == 0){
+        else if (e_stopped == 1 && elev_dir == DIRN_UP && *p_dir_switch == 0){
             printf("Switcher 2\n");
             //elev_dir = DIRN_DOWN;
-            *dir_switch = 1;
+            *p_dir_switch = 1;
             return -3;
         }
-        else if (*dir_switch == 1 && elev_dir == DIRN_DOWN){
+        else if (*p_dir_switch == 1 && elev_dir == DIRN_DOWN){
             printf("Fortsetter 2\n");
             //elev_dir = DIRN_DOWN;
             return -2;
@@ -123,15 +123,15 @@ int order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int c
     return 0;
 };
 
-int orders_bellow(elev_motor_direction_t * priority_dir, int current_floor){
-    if (*priority_dir == DIRN_STOP){
+int controller_orders_bellow(elev_motor_direction_t * p_priority_dir, int current_floor){
+    if (*p_priority_dir == DIRN_STOP){
         for (int floor = 0; floor < current_floor; floor++) {
             if (orders[floor][0] == 1 || orders[floor][2] == 1){
-                *priority_dir = DIRN_DOWN;
+                *p_priority_dir = DIRN_DOWN;
                 return 1;
             }
             if (orders[floor][1] == 1){
-                *priority_dir = DIRN_UP;
+                *p_priority_dir = DIRN_UP;
                 return 1;
             }
         }
@@ -139,11 +139,11 @@ int orders_bellow(elev_motor_direction_t * priority_dir, int current_floor){
     else{
         for (int floor = 0; floor < current_floor; floor++) {
             //If UP order
-            if (orders[floor][1] == 1 && *priority_dir == DIRN_UP) {
+            if (orders[floor][1] == 1 && *p_priority_dir == DIRN_UP) {
                 return 1;
             }
             //If DOWN
-            if (orders[floor][2] == 1 && *priority_dir == DIRN_DOWN) {
+            if (orders[floor][2] == 1 && *p_priority_dir == DIRN_DOWN) {
                 return 1;
             }
         }
@@ -151,15 +151,15 @@ int orders_bellow(elev_motor_direction_t * priority_dir, int current_floor){
     return 0;
 };
 
-int orders_above(elev_motor_direction_t * priority_dir, int current_floor){
-    if (*priority_dir == DIRN_STOP){
+int controller_orders_above(elev_motor_direction_t * p_priority_dir, int current_floor){
+    if (*p_priority_dir == DIRN_STOP){
         for (int floor = N_FLOORS - 1; floor > current_floor; floor--) {
             if (orders[floor][0] == 1 || orders[floor][1] == 1){
-                *priority_dir = DIRN_UP;
+                *p_priority_dir = DIRN_UP;
                 return 1;
             }
             if (orders[floor][2] == 1){
-                *priority_dir = DIRN_DOWN;
+                *p_priority_dir = DIRN_DOWN;
                 return 1;
             }
         }
@@ -167,11 +167,11 @@ int orders_above(elev_motor_direction_t * priority_dir, int current_floor){
     else{
         for (int floor = N_FLOORS - 1; floor > current_floor; floor--) {
             //If UP order
-            if (orders[floor][1] == 1 && *priority_dir == DIRN_UP) {
+            if (orders[floor][1] == 1 && *p_priority_dir == DIRN_UP) {
                 return 1;
             }
             //If DOWN
-            if (orders[floor][2] == 1 && *priority_dir == DIRN_DOWN) {
+            if (orders[floor][2] == 1 && *p_priority_dir == DIRN_DOWN) {
                 return 1;
             }
         }
@@ -179,12 +179,12 @@ int orders_above(elev_motor_direction_t * priority_dir, int current_floor){
     return 0;
 };
 
-int e_stop(int * e_stopped, elev_motor_direction_t * elev_dir, elev_motor_direction_t * priority_dir, states_t * elev_state){
+int controller_e_stop(int * p_e_stopped, elev_motor_direction_t * p_elev_dir, elev_motor_direction_t * p_priority_dir, states_t * p_elev_state){
     if (elev_get_stop_signal() == 1) {
         elev_set_motor_direction(DIRN_STOP);
-        delete_all_orders();
+        controller_delete_all_orders();
         elev_set_stop_lamp(1);
-        *priority_dir = DIRN_STOP;
+        *p_priority_dir = DIRN_STOP;
         if (elev_get_floor_sensor_signal() != -1){
             elev_set_door_open_lamp(1);
         }
@@ -192,21 +192,21 @@ int e_stop(int * e_stopped, elev_motor_direction_t * elev_dir, elev_motor_direct
         elev_set_stop_lamp(0);
 
         if (elev_get_floor_sensor_signal() != -1){
-            start_timer();
-            *elev_state = DOOR_OPEN;
+            timer_start_timer();
+            *p_elev_state = DOOR_OPEN;
         }
         else {
-            *elev_state = IDLE;
+            *p_elev_state = IDLE;
         }
 
-        *e_stopped = 1 ;
+        *p_e_stopped = 1 ;
 
         return 1;
     }
     return 0;
 };
 
-int update_lamps(){
+int controller_update_lamps(){
     for(int i = 0; i < N_FLOORS; i++){
         if (orders[i][3] == 1){
             elev_set_floor_indicator(i);

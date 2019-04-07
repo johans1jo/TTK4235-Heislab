@@ -14,21 +14,21 @@
  * 
  * @return 0 when done
  */
-int delete_order_at_floor(int floor);
+int controller_delete_order_at_floor(int floor);
 
 /**
  * @brief Deletes all orders at all floors.
  * 
  * @return 0 when done.
  */
-int delete_all_orders();
+int controller_delete_all_orders();
 
 /**
  * @brief Checking buttons: COMMAND, UP and DOWN and updates the ordes array.
  * 
  * @return 0 when done.
  */
-int update_orders();
+int controller_update_orders();
 
 /**
  * @brief Chekcs if the elevator has reached a floor and updates the current floor acordingly.
@@ -37,7 +37,7 @@ int update_orders();
  *
  * @return 0 when done.
  */
-int update_elev_postition(int * p_current_floor);
+int controller_update_elev_postition(int * p_current_floor);
 
 /**
  * @brief Checking if there are orders at current floor and if the eleveator should stop.
@@ -49,7 +49,7 @@ int update_elev_postition(int * p_current_floor);
  * 
  * @return 0 when done.
  */
-int order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction_t elev_dir);
+int controller_order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction_t elev_dir);
 
 /**
  * @brief Used to check if the order is at the current floor so the elev can open the doors. It is also
@@ -65,7 +65,7 @@ int order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction
  * 
  * @warning When called this function may change @p p_dir_switch and therfore the next call will give a diffrent result.
  */
-int order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int current_floor, int * dir_switch);
+int controller_order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int current_floor, int * p_dir_switch);
 
 /**
  * @brief Checks if there are any orders of interest above current floor.
@@ -75,7 +75,7 @@ int order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int c
  * 
  * @return 1 if order of interest bellow, 0 if not.
  */
-int orders_bellow(elev_motor_direction_t * priority_dir, int current_floor);
+int controller_orders_bellow(elev_motor_direction_t * p_priority_dir, int current_floor);
 
 /**
  * @brief Checks if there are any orders of interest above current floor.
@@ -85,7 +85,7 @@ int orders_bellow(elev_motor_direction_t * priority_dir, int current_floor);
  * 
  * @return 1 if order of interest above, 0 if not.
  */
-int orders_above(elev_motor_direction_t * priority_dir, int current_floor);
+int controller_orders_above(elev_motor_direction_t * p_priority_dir, int current_floor);
 
 /**
  * @brief Checking emergency stop and if an emergency stop has occured it deside if it's going to  
@@ -99,7 +99,7 @@ int orders_above(elev_motor_direction_t * priority_dir, int current_floor);
  * @return 0 if the fuction does not take in a active emergency signal and therefore do nothing, 
  * 1 if it gets a stopsignal.
  */
-int e_stop(int * e_stopped, elev_motor_direction_t * elev_dir, elev_motor_direction_t * priority_dir, states_t * elev_state);
+int controller_e_stop(int * p_e_stopped, elev_motor_direction_t * p_elev_dir, elev_motor_direction_t * p_priority_dir, states_t * p_elev_state);
 
 /**
  * @brief Controll the lamps of whitch floor the elevator is or last was located in,
@@ -107,4 +107,4 @@ int e_stop(int * e_stopped, elev_motor_direction_t * elev_dir, elev_motor_direct
  * 
  * @return 0 when the function do it's job and succeed.
  */
-int update_lamps();
+int controller_update_lamps();

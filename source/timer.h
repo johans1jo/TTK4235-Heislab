@@ -11,11 +11,11 @@ clock_t before;
 /**
  * @brief Sets the starttime to the current time.
  */
-void start_timer(void);
+void timer_start_timer(void);
 
 /**
  * @brief Checks if it's three seconds since the starttime. 
  *  
  * @return 1 if true, 0 if not.
  */
-int time_out(void);
+int timer_time_out(void);
