@@ -5,14 +5,6 @@
  */
 #include <stdio.h>
 
-
-typedef enum states {
-    INIT = 0,
-    IDLE,
-    RUNNING,
-    DOOR_OPEN
-} states_t;
-
 /**
  * @brief Initializes the elevator by placing it at a known floor.
  * 

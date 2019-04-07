@@ -6,7 +6,13 @@
 
 #include "elev.h"
 #include "timer.h"
-#include "state_machine.h"
+
+typedef enum states {
+    INIT = 0,
+    IDLE,
+    RUNNING,
+    DOOR_OPEN
+} states_t;
 
 /**
  * @brief Deletes all orders at a floor.
