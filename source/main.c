@@ -14,7 +14,7 @@ int main() {
     }
     printf("Initialized\n");
 
-    run();
+    state_machine_run();
 
     return 0;
 }
