@@ -30,9 +30,7 @@ int run(){
         
         e_stop(&e_stopped, &elev_dir, &priority_dir, &elev_state);
 
-        if (elev_get_floor_sensor_signal() != -1){
-            current_floor = elev_get_floor_sensor_signal();
-        }
+		update_elev_postition(&current_floor)
 
         switch (elev_state){
             case INIT       :

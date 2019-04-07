@@ -50,20 +50,14 @@ int update_orders(){
     return 1;
 };
 
-int update_elev_postition(){
-    //Checking floor sensors and updating orders array if a sensor is at high state
-    int current_floor;
-    current_floor = elev_get_floor_sensor_signal();
-    if (current_floor >= 0){
-        for (int i = 0; i < N_FLOORS; i++) {
-            orders[i][3] = 0;
-        }
-        orders[current_floor][3] = 1;
-    }
-    return 1;
+int update_elev_postition(int * p_current_floor){
+	if (elev_get_floor_sensor_signal() != -1) {
+		*current_floor = elev_get_floor_sensor_signal();
+	}
+    return 0;
 };
 
-int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t elev_dir){
+int order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction_t elev_dir){
     int current_floor;
     current_floor = elev_get_floor_sensor_signal();
     if(current_floor != -1){
@@ -75,15 +69,15 @@ int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t
             //              (elev_dir = UP) ||
             //              (priority_dir = STOP))
             (orders[current_floor][1] == 1 && 
-            ((elev_dir == DIRN_DOWN && *priority_dir == DIRN_UP && orders_bellow(priority_dir, current_floor) != 1) ||
-            (elev_dir == DIRN_UP && *priority_dir == DIRN_UP) || elev_dir == DIRN_UP || *priority_dir == DIRN_STOP))
+            ((elev_dir == DIRN_DOWN && *p_priority_dir == DIRN_UP && orders_bellow(priority_dir, current_floor) != 1) ||
+            (elev_dir == DIRN_UP && *p_priority_dir == DIRN_UP) || elev_dir == DIRN_UP || *p_priority_dir == DIRN_STOP))
             ||
             //If DOWN order & (elev_dir = UP & priority_dir = DOWN & no one above is going down ||
             //              (elev_dir = DOWN & priority_dir = DOWN) ||
             //              (priority_dir = STOP))
             (orders[current_floor][2] == 1 && 
-            ((elev_dir == DIRN_UP && *priority_dir == DIRN_DOWN && orders_above(priority_dir, current_floor) != 1) ||
-            (elev_dir == DIRN_DOWN && *priority_dir == DIRN_DOWN) || elev_dir == DIRN_DOWN || *priority_dir == DIRN_STOP))) {
+            ((elev_dir == DIRN_UP && *p_priority_dir == DIRN_DOWN && orders_above(priority_dir, current_floor) != 1) ||
+            (elev_dir == DIRN_DOWN && *p_priority_dir == DIRN_DOWN) || elev_dir == DIRN_DOWN || *p_priority_dir == DIRN_STOP))) {
                 return 1;
                 }
     }

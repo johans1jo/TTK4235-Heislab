@@ -31,6 +31,15 @@ int delete_all_orders();
 int update_orders();
 
 /**
+ * @brief Chekcs if the elevator has reached a floor and updates the current floor acordingly.
+ *
+ * @param p_current_floor A variable that contains the floor number.
+ *
+ * @return 0 when done.
+ */
+int update_elev_postition(int * p_current_floor);
+
+/**
  * @brief Checking if there are orders at current floor and if the eleveator should stop.
  * It also checks if the elevator is about to move bellow the bootom floor or 
  * above the top floor.
@@ -40,9 +49,7 @@ int update_orders();
  * 
  * @return 0 when done.
  */
-int order_at_floor(elev_motor_direction_t * priority_dir, elev_motor_direction_t elev_dir);
-
-int update_elev_postition();
+int order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction_t elev_dir);
 
 /**
  * @brief Used to check if the order is at the current floor so the elev can open the doors. It is also
