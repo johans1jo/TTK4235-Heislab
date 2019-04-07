@@ -5,7 +5,6 @@
  */
 
 #include "elev.h"
-#include "timer.h"
 
 typedef enum states {
     INIT = 0,

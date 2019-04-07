@@ -3,6 +3,12 @@
 #include "timer.h"
 
 int state_machine_init(){
+    // Initialize hardware
+    if (!elev_init()) {
+        printf("Unable to initialize elevator hardware!\n");
+        return 1;
+    }
+    printf("Initialized\n");
     if(0 <= elev_get_floor_sensor_signal()){
         return 1;
     }
