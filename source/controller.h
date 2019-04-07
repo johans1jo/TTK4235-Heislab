@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file
  * @brief This library contains the logic that controls the elevator movements

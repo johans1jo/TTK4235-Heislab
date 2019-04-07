@@ -32,7 +32,7 @@ int state_machine_run(){
 
         switch (elev_state){
             case INIT       :
-            init();
+            state_machine_init();
             elev_state = IDLE;
             break;
 

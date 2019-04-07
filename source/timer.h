@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file
  * @brief A simple module to controll the timer of the door.

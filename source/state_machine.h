@@ -1,4 +1,4 @@
-
+#pragma once
 /**
  * @file
  * @brief This module contains the state machine ant the initialize function.
