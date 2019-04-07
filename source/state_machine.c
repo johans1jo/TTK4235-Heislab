@@ -2,7 +2,7 @@
 #include "controller.h"
 #include "timer.h"
 
-int init(){
+int state_machine_init(){
     if(0 <= elev_get_floor_sensor_signal()){
         return 1;
     }
@@ -14,7 +14,7 @@ int init(){
     return 1;
 }
 
-int run(){
+int state_machine_run(){
     states_t elev_state = INIT;
     elev_motor_direction_t priority_dir = DIRN_STOP;
     elev_motor_direction_t elev_dir = DIRN_STOP;
@@ -27,10 +27,8 @@ int run(){
         controller_update_orders();
         controller_update_elev_postition(&current_floor);
         controller_update_lamps();
-        
         controller_e_stop(&e_stopped, &elev_dir, &priority_dir, &elev_state);
 
-		controller_update_elev_postition(&current_floor);
 
         switch (elev_state){
             case INIT       :

@@ -51,10 +51,15 @@ int controller_update_orders(){
 };
 
 int controller_update_elev_postition(int * p_current_floor){
-	if (elev_get_floor_sensor_signal() != -1) {
-		*p_current_floor = elev_get_floor_sensor_signal();
-	}
-    return 0;
+//Checking floor sensors and updating orders array if a sensor is at high state
+    if (elev_get_floor_sensor_signal() != -1){
+        *p_current_floor = elev_get_floor_sensor_signal();
+        for (int i = 0; i < N_FLOORS; i++) {
+            orders[i][3] = 0;
+        }
+        orders[*p_current_floor][3] = 1;
+    }
+    return 1;
 };
 
 int controller_order_at_floor(elev_motor_direction_t * p_priority_dir, elev_motor_direction_t elev_dir){

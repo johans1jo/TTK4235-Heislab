@@ -18,11 +18,11 @@ typedef enum states {
  * 
  * @return 0 when done.
  */
-int init();
+int state_machine_init();
 
 /**
  * @brief This is the state machine. Just run it from main and watch the magic.
  * 
  * @return 0 when done.
  */
-int run();
+int state_machine_run();
