@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
 /**
  * @file
  * @brief This library contains the logic that controls the elevator movements
@@ -114,3 +116,5 @@ int controller_e_stop(int * p_e_stopped, elev_motor_direction_t * p_elev_dir, el
  * @return 0 when the function do it's job and succeed.
  */
 int controller_update_lamps();
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef STATE_MACHINE_H
+#define STATE_MACHINE_H
+
 /**
  * @file
  * @brief This module contains the state machine ant the initialize function.
@@ -18,3 +20,5 @@ int state_machine_init();
  * @return 0 when done.
  */
 int state_machine_run();
+
+#endif
