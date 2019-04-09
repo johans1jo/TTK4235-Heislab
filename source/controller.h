@@ -7,12 +7,14 @@
  */
 
 #include "elev.h"
-
+/**
+ * @breif Contains the state the elevator possible can be located in
+ */
 typedef enum states {
-    INIT = 0,
-    IDLE,
-    RUNNING,
-    DOOR_OPEN
+    INIT = 0, /**< initialing elevator and state machine */
+    IDLE,     /**< wating for orders */
+    RUNNING,  /**< running the elevator */
+    DOOR_OPEN /**< the door is open */
 } states_t;
 
 /**
@@ -69,8 +71,8 @@ int controller_order_at_floor(elev_motor_direction_t * p_priority_dir, elev_moto
  * @param[in] current_floor The floor which the elevator last moved by.
  * @param[in, out] p_dir_switch A variable to tell if the elevator has switched direction after an emergency stop occured.
  * 
- * @return 1 when it exist a order in the current floor the elevator is located in and it's just going to open the door,
- * 2 if it's been an emergensy stop and it's supposed to switch direction and 0 if not 1 or 2.
+ * @return 1 when there exists an order in the current floor,
+ * 2 if it's been an emergency stop and it's supposed to switch direction or 0 if not 1 or 2.
  * @warning When called this function may change @p p_dir_switch and therfore the next call will give a diffrent result.
  */
 int controller_order_at_current_floor(elev_motor_direction_t * p_elev_dir, int e_stopped, int current_floor, int * p_dir_switch);

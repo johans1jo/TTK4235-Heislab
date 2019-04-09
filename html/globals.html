@@ -69,6 +69,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li class="current"><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
+      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
+      <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
+      <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -88,44 +91,65 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="contents">
 <div class="textblock">Here is a list of all documented functions, variables, defines, enums, and typedefs with links to the documentation:</div><ul>
-<li>delete_all_orders()
-: <a class="el" href="controller_8h.html#a90469a19329d196c2fc0773e36221c32">controller.h</a>
+<li>controller_delete_all_orders()
+: <a class="el" href="controller_8h.html#a6acb7bf61ebd1aadc637485d54bba761">controller.h</a>
 </li>
-<li>delete_order_at_floor()
-: <a class="el" href="controller_8h.html#a1bf77763c29c4980d5f065904b985802">controller.h</a>
+<li>controller_delete_order_at_floor()
+: <a class="el" href="controller_8h.html#af29666bc4492206c0a8f18025da5fb0a">controller.h</a>
 </li>
-<li>e_stop()
-: <a class="el" href="controller_8h.html#ac7927046af7ea1e51c178ede55d39631">controller.h</a>
+<li>controller_e_stop()
+: <a class="el" href="controller_8h.html#a0590c6fc85919f2e6c92facae7d2d97d">controller.h</a>
 </li>
-<li>init()
-: <a class="el" href="state__machine_8h.html#a05848de25ac2dbec233935058a1d24b4">state_machine.h</a>
+<li>controller_order_at_current_floor()
+: <a class="el" href="controller_8h.html#a2f2f6e3d67a596407276d09193936bd2">controller.h</a>
 </li>
-<li>order_at_current_floor()
-: <a class="el" href="controller_8h.html#aeb8f6df3064d502784865b6b8cb8eb6a">controller.h</a>
+<li>controller_order_at_floor()
+: <a class="el" href="controller_8h.html#ab0c894bcc724527bbdd69b2ee25f871b">controller.h</a>
 </li>
-<li>order_at_floor()
-: <a class="el" href="controller_8h.html#aacef2da44622fa8145be41c68a828909">controller.h</a>
+<li>controller_orders_above()
+: <a class="el" href="controller_8h.html#aea909d8a658a7fd1c2e519a3ae13fe5c">controller.h</a>
 </li>
-<li>orders_above()
-: <a class="el" href="controller_8h.html#abfa99631cbe31c4ae9bedeee58dae711">controller.h</a>
+<li>controller_orders_bellow()
+: <a class="el" href="controller_8h.html#a8b5c053572a9fa9284474b13fc6ca666">controller.h</a>
 </li>
-<li>orders_bellow()
-: <a class="el" href="controller_8h.html#a5735d97c09a80893f79ce6ce0fda1619">controller.h</a>
+<li>controller_update_elev_postition()
+: <a class="el" href="controller_8h.html#a0b9e23bbfadec5ee839e8e9157d26081">controller.h</a>
 </li>
-<li>run()
-: <a class="el" href="state__machine_8h.html#a58e8be2db2660128e4e6456a9c981fb5">state_machine.h</a>
+<li>controller_update_lamps()
+: <a class="el" href="controller_8h.html#a2d90abbd2fa39d3ea75f0802eb3529d9">controller.h</a>
 </li>
-<li>start_timer()
-: <a class="el" href="timer_8h.html#aa9854f34aab8315190c2d5945e54b058">timer.h</a>
+<li>controller_update_orders()
+: <a class="el" href="controller_8h.html#a0908010f57221cdf378321156defbf13">controller.h</a>
 </li>
-<li>time_out()
-: <a class="el" href="timer_8h.html#a68a43cbe2b22f37171a4eac866c382f3">timer.h</a>
+<li>DOOR_OPEN
+: <a class="el" href="controller_8h.html#aa19be6305a5a4485e1e70de70ed7d677a11915658ade106027bd75056b907539d">controller.h</a>
 </li>
-<li>update_lamps()
-: <a class="el" href="controller_8h.html#af4edcb71807d2f702bc77ea03fbee08e">controller.h</a>
+<li>IDLE
+: <a class="el" href="controller_8h.html#aa19be6305a5a4485e1e70de70ed7d677afd6a0e4343048b10646dd2976cc5ad18">controller.h</a>
 </li>
-<li>update_orders()
-: <a class="el" href="controller_8h.html#a091e5d1e93a7b6c1569ff194fdbcbacc">controller.h</a>
+<li>INIT
+: <a class="el" href="controller_8h.html#aa19be6305a5a4485e1e70de70ed7d677a0cb1b2c6a7db1f1084886c98909a3f36">controller.h</a>
+</li>
+<li>RUNNING
+: <a class="el" href="controller_8h.html#aa19be6305a5a4485e1e70de70ed7d677a1061be6c3fb88d32829cba6f6b2be304">controller.h</a>
+</li>
+<li>state_machine_init()
+: <a class="el" href="state__machine_8h.html#adf22476b091b134f6bc786c066944441">state_machine.h</a>
+</li>
+<li>state_machine_run()
+: <a class="el" href="state__machine_8h.html#ad2dedf94c6d80fdbebcf166241a0ed61">state_machine.h</a>
+</li>
+<li>states
+: <a class="el" href="controller_8h.html#aa19be6305a5a4485e1e70de70ed7d677">controller.h</a>
+</li>
+<li>states_t
+: <a class="el" href="controller_8h.html#afe776354e225815b2fdb1308becfa9d0">controller.h</a>
+</li>
+<li>timer_start_timer()
+: <a class="el" href="timer_8h.html#a38de4e764d5a9817f0886463eb462330">timer.h</a>
+</li>
+<li>timer_time_out()
+: <a class="el" href="timer_8h.html#acecc2c1f586347f7ce2c8fa1cc048f7e">timer.h</a>
 </li>
 </ul>
 </div><!-- contents -->

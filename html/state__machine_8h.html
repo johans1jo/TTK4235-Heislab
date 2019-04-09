@@ -86,8 +86,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">state_machine.h File Reference</div>  </div>
@@ -101,59 +99,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Include dependency graph for state_machine.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="state__machine_8h__incl.png" border="0" usemap="#source_2state__machine_8h" alt=""/></div>
-<!-- MAP 0 -->
+<map name="source_2state__machine_8h" id="source_2state__machine_8h">
+</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="state__machine_8h__dep__incl.png" border="0" usemap="#source_2state__machine_8hdep" alt=""/></div>
-<!-- MAP 1 -->
+<map name="source_2state__machine_8hdep" id="source_2state__machine_8hdep">
+<area shape="rect" id="node2" href="main_8c_source.html" title="source/main.c" alt="" coords="34,80,138,107"/>
+</map>
 </div>
 </div>
 <p><a href="state__machine_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:afe776354e225815b2fdb1308becfa9d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe776354e225815b2fdb1308becfa9d0"></a>
-typedef enum states&#160;</td><td class="memItemRight" valign="bottom"><b>states_t</b></td></tr>
-<tr class="separator:afe776354e225815b2fdb1308becfa9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:aa19be6305a5a4485e1e70de70ed7d677"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa19be6305a5a4485e1e70de70ed7d677"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>states</b> { <br />
-&#160;&#160;<b>INIT</b> = 0, 
-<b>IDLE</b>, 
-<b>RUNNING</b>, 
-<b>DOOR_OPEN</b>, 
-<br />
-&#160;&#160;<b>INIT</b> = 0, 
-<b>IDLE</b>, 
-<b>RUNNING</b>, 
-<b>DOOR_OPEN</b>
-<br />
- }</td></tr>
-<tr class="separator:aa19be6305a5a4485e1e70de70ed7d677"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a05848de25ac2dbec233935058a1d24b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8h.html#a05848de25ac2dbec233935058a1d24b4">init</a> ()</td></tr>
-<tr class="memdesc:a05848de25ac2dbec233935058a1d24b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the elevator by placing it at a known floor.  <a href="#a05848de25ac2dbec233935058a1d24b4">More...</a><br /></td></tr>
-<tr class="separator:a05848de25ac2dbec233935058a1d24b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58e8be2db2660128e4e6456a9c981fb5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8h.html#a58e8be2db2660128e4e6456a9c981fb5">run</a> ()</td></tr>
-<tr class="memdesc:a58e8be2db2660128e4e6456a9c981fb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the state machine. Just run it from main and watch the magic.  <a href="#a58e8be2db2660128e4e6456a9c981fb5">More...</a><br /></td></tr>
-<tr class="separator:a58e8be2db2660128e4e6456a9c981fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf22476b091b134f6bc786c066944441"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8h.html#adf22476b091b134f6bc786c066944441">state_machine_init</a> ()</td></tr>
+<tr class="memdesc:adf22476b091b134f6bc786c066944441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the elevator by placing it at a known floor.  <a href="#adf22476b091b134f6bc786c066944441">More...</a><br /></td></tr>
+<tr class="separator:adf22476b091b134f6bc786c066944441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2dedf94c6d80fdbebcf166241a0ed61"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8h.html#ad2dedf94c6d80fdbebcf166241a0ed61">state_machine_run</a> ()</td></tr>
+<tr class="memdesc:ad2dedf94c6d80fdbebcf166241a0ed61"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the state machine. Just run it from main and watch the magic.  <a href="#ad2dedf94c6d80fdbebcf166241a0ed61">More...</a><br /></td></tr>
+<tr class="separator:ad2dedf94c6d80fdbebcf166241a0ed61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This module contains the state machine ant the initialize function. </p>
 
 <p>Definition in file <a class="el" href="state__machine_8h_source.html">state_machine.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a05848de25ac2dbec233935058a1d24b4"></a>
+<a class="anchor" id="adf22476b091b134f6bc786c066944441"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int init </td>
+          <td class="memname">int state_machine_init </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -168,12 +147,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a58e8be2db2660128e4e6456a9c981fb5"></a>
+<a class="anchor" id="ad2dedf94c6d80fdbebcf166241a0ed61"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int run </td>
+          <td class="memname">int state_machine_run </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -184,7 +163,7 @@ Functions</h2></td></tr>
 <p>This is the state machine. Just run it from main and watch the magic. </p>
 <dl class="section return"><dt>Returns</dt><dd>0 when done. </dd></dl>
 
-<p>Definition at line <a class="el" href="state__machine_8c_source.html#l00017">17</a> of file <a class="el" href="state__machine_8c_source.html">state_machine.c</a>.</p>
+<p>Definition at line <a class="el" href="state__machine_8c_source.html#l00023">23</a> of file <a class="el" href="state__machine_8c_source.html">state_machine.c</a>.</p>
 
 </div>
 </div>
