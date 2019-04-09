@@ -64,16 +64,16 @@ int controller_order_at_floor(elev_motor_direction_t * p_priority_dir, elev_moto
  * used to check if the elevator is actually at the floor it thinks it is after an emergency stop and if
  * the elevator switched direction to get back to the floor it thinks it is at.
  * 
- * @param[in] elev_dir The elevators direction of movement.
+ * @param[in, out] p_elev_dir The elevators direction of movement.
  * @param[in] e_stopped 0 or not 0 integer to tell if an emergency stop has occured.
  * @param[in] current_floor The floor which the elevator last moved by.
  * @param[in, out] p_dir_switch A variable to tell if the elevator has switched direction after an emergency stop occured.
  * 
- * @return 2 or 3 if elev should move up, -2 or -3 if elev should move down, 1 if the doors should open or 0 if nothing should be done.
- * 
+ * @return 1 when it exist a order in the current floor the elevator is located in and it's just going to open the door,
+ * 2 if it's been an emergensy stop and it's supposed to switch direction and 0 if not 1 or 2.
  * @warning When called this function may change @p p_dir_switch and therfore the next call will give a diffrent result.
  */
-int controller_order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int current_floor, int * p_dir_switch);
+int controller_order_at_current_floor(elev_motor_direction_t * p_elev_dir, int e_stopped, int current_floor, int * p_dir_switch);
 
 /**
  * @brief Checks if there are any orders of interest above current floor.

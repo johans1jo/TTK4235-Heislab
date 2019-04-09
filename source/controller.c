@@ -1,4 +1,5 @@
 #include "controller.h"
+#include "timer.h"
 #include "elev.h"
 #include <stdio.h>
 
@@ -95,31 +96,31 @@ int controller_order_at_floor(elev_motor_direction_t * p_priority_dir, elev_moto
     return 0;
 };
 
-int controller_order_at_current_floor(elev_motor_direction_t elev_dir, int e_stopped, int current_floor, int * p_dir_switch){
+int controller_order_at_current_floor(elev_motor_direction_t * p_elev_dir, int e_stopped, int current_floor, int * p_dir_switch){
     if ((orders[current_floor][0] == 1) ||
         (orders[current_floor][1] == 1) ||
         (orders[current_floor][2] == 1)){
-        if (e_stopped == 1 && elev_dir == DIRN_DOWN && *p_dir_switch == 0){
+        if (e_stopped == 1 && *p_elev_dir == DIRN_DOWN && *p_dir_switch == 0){
             printf("Switcher 1\n");
-            //elev_dir = DIRN_UP;
+            *p_elev_dir = DIRN_UP;
             *p_dir_switch = 1;
             return 2;
         }
-        else if (*p_dir_switch == 1 && elev_dir == DIRN_UP){
+        else if (*p_dir_switch == 1 && *p_elev_dir == DIRN_UP){
             printf("Fortsetter 1\n");
-            //elev_dir = DIRN_UP;
-            return 3;
+            *p_elev_dir = DIRN_UP;
+            return 2;
         }
-        else if (e_stopped == 1 && elev_dir == DIRN_UP && *p_dir_switch == 0){
+        else if (e_stopped == 1 && *p_elev_dir == DIRN_UP && *p_dir_switch == 0){
             printf("Switcher 2\n");
-            //elev_dir = DIRN_DOWN;
+            *p_elev_dir = DIRN_DOWN;
             *p_dir_switch = 1;
-            return -3;
+            return 2;
         }
-        else if (*p_dir_switch == 1 && elev_dir == DIRN_DOWN){
+        else if (*p_dir_switch == 1 && *p_elev_dir == DIRN_DOWN){
             printf("Fortsetter 2\n");
-            //elev_dir = DIRN_DOWN;
-            return -2;
+            *p_elev_dir = DIRN_DOWN;
+            return 2;
         }
         else {
             return 1;

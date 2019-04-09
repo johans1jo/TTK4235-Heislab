@@ -43,25 +43,15 @@ int state_machine_run(){
             break;
 
             case IDLE       :
-            what_to_do = controller_order_at_current_floor(elev_dir, e_stopped, current_floor, &dir_switch);
+            what_to_do = controller_order_at_current_floor(&elev_dir, e_stopped, current_floor, &dir_switch);
             if (what_to_do == 1){
                 elev_state = DOOR_OPEN;
                 elev_set_door_open_lamp(1);
                 timer_start_timer();
             }
-            else if(what_to_do == 2 || what_to_do == 3){
-                printf("Restoring from emergency, going UP\n");
-                elev_dir = DIRN_UP;
+            else if (what_to_do == 2){
                 elev_set_motor_direction(elev_dir);
                 elev_state = RUNNING;
-
-            }
-            else if(what_to_do == -2 || what_to_do == -3){
-                printf("Restoring from emergency, going DOWN\n");
-                elev_dir = DIRN_DOWN;
-                elev_set_motor_direction(elev_dir);
-                elev_state = RUNNING;
-
             }
             else if (controller_orders_above(&priority_dir, current_floor) == 1){
                 printf("Order above, going up!!\n");
