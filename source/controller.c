@@ -144,6 +144,9 @@ int controller_orders_bellow(elev_motor_direction_t * p_priority_dir, int curren
     }
     else{
         for (int floor = 0; floor < current_floor; floor++) {
+            if (orders[floor][0] == 1) {
+                return 1;
+            }
             //If UP order
             if (orders[floor][1] == 1 && *p_priority_dir == DIRN_UP) {
                 return 1;
@@ -172,6 +175,9 @@ int controller_orders_above(elev_motor_direction_t * p_priority_dir, int current
     }
     else{
         for (int floor = N_FLOORS - 1; floor > current_floor; floor--) {
+            if (orders[floor][0] == 1) {
+                return 1;
+            }
             //If UP order
             if (orders[floor][1] == 1 && *p_priority_dir == DIRN_UP) {
                 return 1;
