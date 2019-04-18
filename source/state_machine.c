@@ -54,13 +54,11 @@ int state_machine_run(){
                 elev_state = RUNNING;
             }
             else if (controller_orders_above(&priority_dir, current_floor) == 1){
-                printf("Order above, going up!!\n");
                 elev_dir = DIRN_UP;
                 elev_set_motor_direction(elev_dir);
                 elev_state = RUNNING;
             }
             else if (controller_orders_bellow(&priority_dir, current_floor) == 1){
-                printf("Order bellow, going down!!\n");
                 elev_dir = DIRN_DOWN;
                 elev_set_motor_direction(elev_dir);
                 elev_state = RUNNING;
@@ -86,17 +84,14 @@ int state_machine_run(){
                 if (controller_orders_bellow(&priority_dir, current_floor) == 1){
                     elev_dir = DIRN_DOWN;
                     elev_set_motor_direction(elev_dir);
-                    printf("DIRN_DOWN -- BELLOW -1\n");
                     elev_state = RUNNING;
                 }
                 else if (controller_orders_above(&priority_dir, current_floor) == 1){
                     elev_dir = DIRN_UP;
                     elev_set_motor_direction(elev_dir);
-                    printf("DIRN_UP -- ABOVE 1\n");
                     elev_state = RUNNING;
                 }
                 else{
-                    printf("Taking a rest in idle\n");
                     priority_dir = DIRN_STOP;
                     elev_state = IDLE;
                 }
