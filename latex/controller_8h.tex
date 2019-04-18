@@ -5,7 +5,7 @@
 This library contains the logic that controls the elevator movements.  
 
 
-{\ttfamily \#include \char`\"{}elev.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}elev.\+h\char`\"{}}\newline
 Include dependency graph for controller.\+h\+:
 \nopagebreak
 \begin{figure}[H]
@@ -67,28 +67,39 @@ This library contains the logic that controls the elevator movements.
 
 
 \subsection{Typedef Documentation}
+\mbox{\Hypertarget{controller_8h_afe776354e225815b2fdb1308becfa9d0}\label{controller_8h_afe776354e225815b2fdb1308becfa9d0}} 
 \index{controller.\+h@{controller.\+h}!states\+\_\+t@{states\+\_\+t}}
 \index{states\+\_\+t@{states\+\_\+t}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{states\+\_\+t}{states_t}}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf states}  {\bf states\+\_\+t}}\hypertarget{controller_8h_afe776354e225815b2fdb1308becfa9d0}{}\label{controller_8h_afe776354e225815b2fdb1308becfa9d0}
+\subsubsection{\texorpdfstring{states\+\_\+t}{states\_t}}
+{\footnotesize\ttfamily typedef enum \hyperlink{controller_8h_aa19be6305a5a4485e1e70de70ed7d677}{states}  \hyperlink{controller_8h_afe776354e225815b2fdb1308becfa9d0}{states\+\_\+t}}
+
 Contains the state the elevator possible can be located in 
 
 \subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677}} 
 \index{controller.\+h@{controller.\+h}!states@{states}}
 \index{states@{states}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{states}{states}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf states}}\hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677}{}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677}
-Contains the state the elevator possible can be located in \begin{Desc}
-\item[Enumerator]\par
-\begin{description}
-\index{I\+N\+IT@{I\+N\+IT}!controller.\+h@{controller.\+h}}\index{controller.\+h@{controller.\+h}!I\+N\+IT@{I\+N\+IT}}\item[{\em 
-I\+N\+IT\hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a0cb1b2c6a7db1f1084886c98909a3f36}{}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a0cb1b2c6a7db1f1084886c98909a3f36}
-}]initialing elevator and state machine \index{I\+D\+LE@{I\+D\+LE}!controller.\+h@{controller.\+h}}\index{controller.\+h@{controller.\+h}!I\+D\+LE@{I\+D\+LE}}\item[{\em 
-I\+D\+LE\hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677afd6a0e4343048b10646dd2976cc5ad18}{}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677afd6a0e4343048b10646dd2976cc5ad18}
-}]wating for orders \index{R\+U\+N\+N\+I\+NG@{R\+U\+N\+N\+I\+NG}!controller.\+h@{controller.\+h}}\index{controller.\+h@{controller.\+h}!R\+U\+N\+N\+I\+NG@{R\+U\+N\+N\+I\+NG}}\item[{\em 
-R\+U\+N\+N\+I\+NG\hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a1061be6c3fb88d32829cba6f6b2be304}{}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a1061be6c3fb88d32829cba6f6b2be304}
-}]running the elevator \index{D\+O\+O\+R\+\_\+\+O\+P\+EN@{D\+O\+O\+R\+\_\+\+O\+P\+EN}!controller.\+h@{controller.\+h}}\index{controller.\+h@{controller.\+h}!D\+O\+O\+R\+\_\+\+O\+P\+EN@{D\+O\+O\+R\+\_\+\+O\+P\+EN}}\item[{\em 
-D\+O\+O\+R\+\_\+\+O\+P\+EN\hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a11915658ade106027bd75056b907539d}{}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a11915658ade106027bd75056b907539d}
-}]the door is open \end{description}
-\end{Desc}
+\subsubsection{\texorpdfstring{states}{states}}
+{\footnotesize\ttfamily enum \hyperlink{controller_8h_aa19be6305a5a4485e1e70de70ed7d677}{states}}
+
+Contains the state the elevator possible can be located in \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+N\+IT@{I\+N\+IT}!controller.\+h@{controller.\+h}}\index{controller.\+h@{controller.\+h}!I\+N\+IT@{I\+N\+IT}}}\mbox{\Hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a0cb1b2c6a7db1f1084886c98909a3f36}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a0cb1b2c6a7db1f1084886c98909a3f36}} 
+I\+N\+IT&initialing elevator and state machine \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+D\+LE@{I\+D\+LE}!controller.\+h@{controller.\+h}}\index{controller.\+h@{controller.\+h}!I\+D\+LE@{I\+D\+LE}}}\mbox{\Hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677afd6a0e4343048b10646dd2976cc5ad18}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677afd6a0e4343048b10646dd2976cc5ad18}} 
+I\+D\+LE&wating for orders \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+U\+N\+N\+I\+NG@{R\+U\+N\+N\+I\+NG}!controller.\+h@{controller.\+h}}\index{controller.\+h@{controller.\+h}!R\+U\+N\+N\+I\+NG@{R\+U\+N\+N\+I\+NG}}}\mbox{\Hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a1061be6c3fb88d32829cba6f6b2be304}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a1061be6c3fb88d32829cba6f6b2be304}} 
+R\+U\+N\+N\+I\+NG&running the elevator \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+O\+O\+R\+\_\+\+O\+P\+EN@{D\+O\+O\+R\+\_\+\+O\+P\+EN}!controller.\+h@{controller.\+h}}\index{controller.\+h@{controller.\+h}!D\+O\+O\+R\+\_\+\+O\+P\+EN@{D\+O\+O\+R\+\_\+\+O\+P\+EN}}}\mbox{\Hypertarget{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a11915658ade106027bd75056b907539d}\label{controller_8h_aa19be6305a5a4485e1e70de70ed7d677a11915658ade106027bd75056b907539d}} 
+D\+O\+O\+R\+\_\+\+O\+P\+EN&the door is open \\
+\hline
+
+\end{DoxyEnumFields}
 
 
 Definition at line 13 of file controller.\+h.
@@ -96,13 +107,12 @@ Definition at line 13 of file controller.\+h.
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{controller_8h_a6acb7bf61ebd1aadc637485d54bba761}\label{controller_8h_a6acb7bf61ebd1aadc637485d54bba761}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+delete\+\_\+all\+\_\+orders@{controller\+\_\+delete\+\_\+all\+\_\+orders}}
 \index{controller\+\_\+delete\+\_\+all\+\_\+orders@{controller\+\_\+delete\+\_\+all\+\_\+orders}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+delete\+\_\+all\+\_\+orders()}{controller_delete_all_orders()}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+delete\+\_\+all\+\_\+orders (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_a6acb7bf61ebd1aadc637485d54bba761}{}\label{controller_8h_a6acb7bf61ebd1aadc637485d54bba761}
+\subsubsection{\texorpdfstring{controller\+\_\+delete\+\_\+all\+\_\+orders()}{controller\_delete\_all\_orders()}}
+{\footnotesize\ttfamily int controller\+\_\+delete\+\_\+all\+\_\+orders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Deletes all orders at all floors. 
@@ -114,13 +124,12 @@ Deletes all orders at all floors.
 
 Definition at line 24 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_af29666bc4492206c0a8f18025da5fb0a}\label{controller_8h_af29666bc4492206c0a8f18025da5fb0a}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor@{controller\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor}}
 \index{controller\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor@{controller\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor(int floor)}{controller_delete_order_at_floor(int floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor (
-\begin{DoxyParamCaption}
-\item[{int}]{floor}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_af29666bc4492206c0a8f18025da5fb0a}{}\label{controller_8h_af29666bc4492206c0a8f18025da5fb0a}
+\subsubsection{\texorpdfstring{controller\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor()}{controller\_delete\_order\_at\_floor()}}
+{\footnotesize\ttfamily int controller\+\_\+delete\+\_\+order\+\_\+at\+\_\+floor (\begin{DoxyParamCaption}\item[{int}]{floor }\end{DoxyParamCaption})}
+
 
 
 Deletes all orders at a floor. 
@@ -137,16 +146,12 @@ Deletes all orders at a floor.
 
 Definition at line 17 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_a0590c6fc85919f2e6c92facae7d2d97d}\label{controller_8h_a0590c6fc85919f2e6c92facae7d2d97d}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+e\+\_\+stop@{controller\+\_\+e\+\_\+stop}}
 \index{controller\+\_\+e\+\_\+stop@{controller\+\_\+e\+\_\+stop}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+e\+\_\+stop(int $\ast$p\+\_\+e\+\_\+stopped, elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$p\+\_\+elev\+\_\+dir, elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$p\+\_\+priority\+\_\+dir, states\+\_\+t $\ast$p\+\_\+elev\+\_\+state)}{controller_e_stop(int *p_e_stopped, elev_motor_direction_t *p_elev_dir, elev_motor_direction_t *p_priority_dir, states_t *p_elev_state)}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+e\+\_\+stop (
-\begin{DoxyParamCaption}
-\item[{int $\ast$}]{p\+\_\+e\+\_\+stopped, }
-\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+elev\+\_\+dir, }
-\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+priority\+\_\+dir, }
-\item[{{\bf states\+\_\+t} $\ast$}]{p\+\_\+elev\+\_\+state}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_a0590c6fc85919f2e6c92facae7d2d97d}{}\label{controller_8h_a0590c6fc85919f2e6c92facae7d2d97d}
+\subsubsection{\texorpdfstring{controller\+\_\+e\+\_\+stop()}{controller\_e\_stop()}}
+{\footnotesize\ttfamily int controller\+\_\+e\+\_\+stop (\begin{DoxyParamCaption}\item[{int $\ast$}]{p\+\_\+e\+\_\+stopped,  }\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+elev\+\_\+dir,  }\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+priority\+\_\+dir,  }\item[{\hyperlink{controller_8h_afe776354e225815b2fdb1308becfa9d0}{states\+\_\+t} $\ast$}]{p\+\_\+elev\+\_\+state }\end{DoxyParamCaption})}
+
 
 
 Checking emergency stop and if an emergency stop has occured it deside if it\textquotesingle{}s going to open the door or just stand still. 
@@ -169,16 +174,12 @@ Checking emergency stop and if an emergency stop has occured it deside if it\tex
 
 Definition at line 194 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_a2f2f6e3d67a596407276d09193936bd2}\label{controller_8h_a2f2f6e3d67a596407276d09193936bd2}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+order\+\_\+at\+\_\+current\+\_\+floor@{controller\+\_\+order\+\_\+at\+\_\+current\+\_\+floor}}
 \index{controller\+\_\+order\+\_\+at\+\_\+current\+\_\+floor@{controller\+\_\+order\+\_\+at\+\_\+current\+\_\+floor}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+order\+\_\+at\+\_\+current\+\_\+floor(elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$p\+\_\+elev\+\_\+dir, int e\+\_\+stopped, int current\+\_\+floor, int $\ast$p\+\_\+dir\+\_\+switch)}{controller_order_at_current_floor(elev_motor_direction_t *p_elev_dir, int e_stopped, int current_floor, int *p_dir_switch)}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+order\+\_\+at\+\_\+current\+\_\+floor (
-\begin{DoxyParamCaption}
-\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+elev\+\_\+dir, }
-\item[{int}]{e\+\_\+stopped, }
-\item[{int}]{current\+\_\+floor, }
-\item[{int $\ast$}]{p\+\_\+dir\+\_\+switch}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_a2f2f6e3d67a596407276d09193936bd2}{}\label{controller_8h_a2f2f6e3d67a596407276d09193936bd2}
+\subsubsection{\texorpdfstring{controller\+\_\+order\+\_\+at\+\_\+current\+\_\+floor()}{controller\_order\_at\_current\_floor()}}
+{\footnotesize\ttfamily int controller\+\_\+order\+\_\+at\+\_\+current\+\_\+floor (\begin{DoxyParamCaption}\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+elev\+\_\+dir,  }\item[{int}]{e\+\_\+stopped,  }\item[{int}]{current\+\_\+floor,  }\item[{int $\ast$}]{p\+\_\+dir\+\_\+switch }\end{DoxyParamCaption})}
+
 
 
 Used to check if the order is at the current floor so the elev can open the doors. It is also used to check if the elevator is actually at the floor it thinks it is after an emergency stop and if the elevator switched direction to get back to the floor it thinks it is at. 
@@ -204,14 +205,12 @@ When called this function may change {\ttfamily p\+\_\+dir\+\_\+switch} and ther
 
 Definition at line 99 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_ab0c894bcc724527bbdd69b2ee25f871b}\label{controller_8h_ab0c894bcc724527bbdd69b2ee25f871b}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+order\+\_\+at\+\_\+floor@{controller\+\_\+order\+\_\+at\+\_\+floor}}
 \index{controller\+\_\+order\+\_\+at\+\_\+floor@{controller\+\_\+order\+\_\+at\+\_\+floor}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+order\+\_\+at\+\_\+floor(elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$p\+\_\+priority\+\_\+dir, elev\+\_\+motor\+\_\+direction\+\_\+t elev\+\_\+dir)}{controller_order_at_floor(elev_motor_direction_t *p_priority_dir, elev_motor_direction_t elev_dir)}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+order\+\_\+at\+\_\+floor (
-\begin{DoxyParamCaption}
-\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+priority\+\_\+dir, }
-\item[{elev\+\_\+motor\+\_\+direction\+\_\+t}]{elev\+\_\+dir}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_ab0c894bcc724527bbdd69b2ee25f871b}{}\label{controller_8h_ab0c894bcc724527bbdd69b2ee25f871b}
+\subsubsection{\texorpdfstring{controller\+\_\+order\+\_\+at\+\_\+floor()}{controller\_order\_at\_floor()}}
+{\footnotesize\ttfamily int controller\+\_\+order\+\_\+at\+\_\+floor (\begin{DoxyParamCaption}\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+priority\+\_\+dir,  }\item[{elev\+\_\+motor\+\_\+direction\+\_\+t}]{elev\+\_\+dir }\end{DoxyParamCaption})}
+
 
 
 Checking if there are orders at current floor and if the eleveator should stop. It also checks if the elevator is about to move bellow the bootom floor or above the top floor. 
@@ -230,14 +229,12 @@ Checking if there are orders at current floor and if the eleveator should stop. 
 
 Definition at line 66 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_aea909d8a658a7fd1c2e519a3ae13fe5c}\label{controller_8h_aea909d8a658a7fd1c2e519a3ae13fe5c}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+orders\+\_\+above@{controller\+\_\+orders\+\_\+above}}
 \index{controller\+\_\+orders\+\_\+above@{controller\+\_\+orders\+\_\+above}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+orders\+\_\+above(elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$p\+\_\+priority\+\_\+dir, int current\+\_\+floor)}{controller_orders_above(elev_motor_direction_t *p_priority_dir, int current_floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+orders\+\_\+above (
-\begin{DoxyParamCaption}
-\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+priority\+\_\+dir, }
-\item[{int}]{current\+\_\+floor}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_aea909d8a658a7fd1c2e519a3ae13fe5c}{}\label{controller_8h_aea909d8a658a7fd1c2e519a3ae13fe5c}
+\subsubsection{\texorpdfstring{controller\+\_\+orders\+\_\+above()}{controller\_orders\_above()}}
+{\footnotesize\ttfamily int controller\+\_\+orders\+\_\+above (\begin{DoxyParamCaption}\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+priority\+\_\+dir,  }\item[{int}]{current\+\_\+floor }\end{DoxyParamCaption})}
+
 
 
 Checks if there are any orders of interest above current floor. 
@@ -256,14 +253,12 @@ Checks if there are any orders of interest above current floor.
 
 Definition at line 163 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_a8b5c053572a9fa9284474b13fc6ca666}\label{controller_8h_a8b5c053572a9fa9284474b13fc6ca666}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+orders\+\_\+bellow@{controller\+\_\+orders\+\_\+bellow}}
 \index{controller\+\_\+orders\+\_\+bellow@{controller\+\_\+orders\+\_\+bellow}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+orders\+\_\+bellow(elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$p\+\_\+priority\+\_\+dir, int current\+\_\+floor)}{controller_orders_bellow(elev_motor_direction_t *p_priority_dir, int current_floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+orders\+\_\+bellow (
-\begin{DoxyParamCaption}
-\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+priority\+\_\+dir, }
-\item[{int}]{current\+\_\+floor}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_a8b5c053572a9fa9284474b13fc6ca666}{}\label{controller_8h_a8b5c053572a9fa9284474b13fc6ca666}
+\subsubsection{\texorpdfstring{controller\+\_\+orders\+\_\+bellow()}{controller\_orders\_bellow()}}
+{\footnotesize\ttfamily int controller\+\_\+orders\+\_\+bellow (\begin{DoxyParamCaption}\item[{elev\+\_\+motor\+\_\+direction\+\_\+t $\ast$}]{p\+\_\+priority\+\_\+dir,  }\item[{int}]{current\+\_\+floor }\end{DoxyParamCaption})}
+
 
 
 Checks if there are any orders of interest above current floor. 
@@ -282,13 +277,12 @@ Checks if there are any orders of interest above current floor.
 
 Definition at line 132 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_a0b9e23bbfadec5ee839e8e9157d26081}\label{controller_8h_a0b9e23bbfadec5ee839e8e9157d26081}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+update\+\_\+elev\+\_\+postition@{controller\+\_\+update\+\_\+elev\+\_\+postition}}
 \index{controller\+\_\+update\+\_\+elev\+\_\+postition@{controller\+\_\+update\+\_\+elev\+\_\+postition}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+update\+\_\+elev\+\_\+postition(int $\ast$p\+\_\+current\+\_\+floor)}{controller_update_elev_postition(int *p_current_floor)}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+update\+\_\+elev\+\_\+postition (
-\begin{DoxyParamCaption}
-\item[{int $\ast$}]{p\+\_\+current\+\_\+floor}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_a0b9e23bbfadec5ee839e8e9157d26081}{}\label{controller_8h_a0b9e23bbfadec5ee839e8e9157d26081}
+\subsubsection{\texorpdfstring{controller\+\_\+update\+\_\+elev\+\_\+postition()}{controller\_update\_elev\_postition()}}
+{\footnotesize\ttfamily int controller\+\_\+update\+\_\+elev\+\_\+postition (\begin{DoxyParamCaption}\item[{int $\ast$}]{p\+\_\+current\+\_\+floor }\end{DoxyParamCaption})}
+
 
 
 Chekcs if the elevator has reached a floor and updates the current floor acordingly. 
@@ -305,13 +299,12 @@ Chekcs if the elevator has reached a floor and updates the current floor acordin
 
 Definition at line 54 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_a2d90abbd2fa39d3ea75f0802eb3529d9}\label{controller_8h_a2d90abbd2fa39d3ea75f0802eb3529d9}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+update\+\_\+lamps@{controller\+\_\+update\+\_\+lamps}}
 \index{controller\+\_\+update\+\_\+lamps@{controller\+\_\+update\+\_\+lamps}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+update\+\_\+lamps()}{controller_update_lamps()}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+update\+\_\+lamps (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_a2d90abbd2fa39d3ea75f0802eb3529d9}{}\label{controller_8h_a2d90abbd2fa39d3ea75f0802eb3529d9}
+\subsubsection{\texorpdfstring{controller\+\_\+update\+\_\+lamps()}{controller\_update\_lamps()}}
+{\footnotesize\ttfamily int controller\+\_\+update\+\_\+lamps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Controll the lamps of whitch floor the elevator is or last was located in, floorpanel and elevatorepanel, but not the emergency lamp. 
@@ -323,13 +316,12 @@ Controll the lamps of whitch floor the elevator is or last was located in, floor
 
 Definition at line 221 of file controller.\+c.
 
+\mbox{\Hypertarget{controller_8h_a0908010f57221cdf378321156defbf13}\label{controller_8h_a0908010f57221cdf378321156defbf13}} 
 \index{controller.\+h@{controller.\+h}!controller\+\_\+update\+\_\+orders@{controller\+\_\+update\+\_\+orders}}
 \index{controller\+\_\+update\+\_\+orders@{controller\+\_\+update\+\_\+orders}!controller.\+h@{controller.\+h}}
-\subsubsection[{\texorpdfstring{controller\+\_\+update\+\_\+orders()}{controller_update_orders()}}]{\setlength{\rightskip}{0pt plus 5cm}int controller\+\_\+update\+\_\+orders (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{controller_8h_a0908010f57221cdf378321156defbf13}{}\label{controller_8h_a0908010f57221cdf378321156defbf13}
+\subsubsection{\texorpdfstring{controller\+\_\+update\+\_\+orders()}{controller\_update\_orders()}}
+{\footnotesize\ttfamily int controller\+\_\+update\+\_\+orders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Checking buttons\+: C\+O\+M\+M\+A\+ND, UP and D\+O\+WN and updates the ordes array. 
